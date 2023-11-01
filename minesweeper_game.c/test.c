@@ -19,13 +19,13 @@ void menu()
 }
 
 
-
 int main()
 {
 	int row = 0;
 	int col = 0;
 	int start = 0;
-	char arr[27][27] = { 0 };
+	char mine[29][29] = { 0 };
+	char show[29][29] = { 0 };
 	char set = 0;
 	menu;
 	do
@@ -47,7 +47,8 @@ int main()
 			case 3:row = 25, col = 25;
 				break;
 			}
-			initboard( arr[row][col], row + 2, col + 2, set);
+			initboard(mine, row + 3, col + 3, '0');
+			initboard(show, row + 3, col + 3, '*');
 			break;
 		case 0:
 			printf("ÍË³öÓÎÏ·\n");

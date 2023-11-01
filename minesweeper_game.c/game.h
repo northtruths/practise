@@ -6,4 +6,4 @@
 #include<stdio.h>
 
 //≥ı ºªØ∆Â≈Ã
-void initboard(int row, int col);
+void initboard(char arr[29][29], int row, int col, char set);
