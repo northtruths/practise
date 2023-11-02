@@ -23,10 +23,12 @@ int main()
 {
 	int row = 0;
 	int col = 0;
+	int count = 0;
 	int start = 0;
 	char mine[29][29] = { 0 };
 	char show[29][29] = { 0 };
 	char set = 0;
+	srand((unsigned int)time(NULL));
 	menu;
 	do
 	{
@@ -40,15 +42,18 @@ int main()
 			scanf("%d", &chose);
 			switch (chose)
 			{
-			case 1:row = 9, col = 9;
+			case 1:row = 9, col = 9,count = 10;
 				break;
-			case 2:row = 16, col = 16;
+			case 2:row = 16, col = 16, count = 40;
 				break;
-			case 3:row = 25, col = 25;
+			case 3:row = 25, col = 25, count = 99;
 				break;
 			}
 			initboard(mine, row + 3, col + 3, '0');
 			initboard(show, row + 3, col + 3, '*');
+			display(show, row + 3, col + 3);
+			setmine(mine, row + 3, col + 3, count);
+			findmine(show, mine, row, col, count);
 			break;
 		case 0:
 			printf("ÍË³öÓÎÏ·\n");
