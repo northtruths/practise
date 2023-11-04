@@ -5,11 +5,11 @@
 void initboard(char arr[29][29], int row, int col, char set)
 {
 	int i, j = 0;
-	for (i = 1; i < row; i++)//行
+	for (i = 0; i < row; i++)//行
 	{
-		for (j = 1; j < col; j++)//列
+		for (j = 0; j < col; j++)//列
 		{
-			arr[i - 1][j - 1] = set;//初始化棋盘为 0 / *
+			arr[i][j] = set;//初始化棋盘为 0 / *
  		}
 		
 	}
@@ -66,10 +66,10 @@ void setmine(char arr[29][29], int row, int col, int count)
 //显示雷的个数
 int count_mine(char arr[29][29], int x ,int y)
 {
-	int count = 0;
-	count = arr[x - 1][y - 1] + arr[x - 1][y] + arr[x - 1][y + 1] + arr[x][y - 1]
-		  + arr[x][y + 1] + arr[x + 1][y - 1] + arr[x + 1][y] + arr[x + 1][y + 1];
-	return count;
+	int cot = 0;
+	cot = arr[x - 1][y - 1] + arr[x - 1][y] + arr[x - 1][y + 1] + arr[x][y - 1]
+		  + arr[x][y + 1] + arr[x + 1][y - 1] + arr[x + 1][y] + arr[x + 1][y + 1] - 8 * '0';//计算坐标周围雷的数量（因数组是字符所以要借助ASCII来计算）
+	return cot;
 }
 
 //排查雷
@@ -85,14 +85,16 @@ void findmine(char show[29][29], char mine[29][29], int row, int col, int count)
 		{
 			if (mine[x + 1][y + 1] == '1')
 			{
-				printf("你被炸死了");
+				printf("你被炸死了!\n");
+				display(mine, row + 3, col + 3);//展示雷
 				break;
 			}
 			else//如果不是雷，显示周围一圈雷的个数
 			{
 				int num = 0;
-				num = count_mine(mine, x, y);
-				show[x][y] = num + '0';//整形加字符0将 count 转换为字符
+				num = count_mine(mine, x + 1, y + 1);
+				show[x + 1][y + 1] = num + '0';//整形加字符0将 count 转换为字符
+				system("cls");//清除屏幕
 				display(show, row + 3, col + 3);
 				win++;//每排一个，离胜利就进一步
 			}
