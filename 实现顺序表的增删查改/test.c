@@ -3,8 +3,6 @@
 #include"SeqList.h"
 
 
-
-
 int main()
 {
 	//创建一个顺序表并初始化

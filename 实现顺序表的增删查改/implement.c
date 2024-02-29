@@ -18,17 +18,6 @@ void SLDelAll(SL* sl)
 	sl->size = 0;
 }
 
-//À©ÈÝ
-void SLExpa(SL* sl)
-{
-	int rea = 0;
-	if (sl->vol == 0)
-		rea = 4;
-	else
-		rea *= 2;
-	sl->arr = (DataType*)realloc(sl->arr, sizeof(DataType) * rea);
-	sl->vol = rea;
-}
 
 //Í·²å\Î²²å
 void SLAddHead(SL* sl, DataType data)
