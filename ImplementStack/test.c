@@ -16,14 +16,14 @@ int main()
 	printf("%d\n",SizeStack(&sk));//5
 	while ((&sk)->top)
 	{
-		printf("%d ", (&sk)->arr[(&sk)->top - 1]);
+		printf("%d ", (&sk)->arr[(&sk)->top - 1]);//654321
 		PopStack(&sk);
 	}
-	DestroyStack(&sk);
-
-	if (EmptyStack((&sk)->arr))
+	if (EmptyStack(&sk))
 		printf("Îª¿Õ£¡\n");
 	else
 		printf("²»Îª¿Õ£¡\n");
+	DestroyStack(&sk);
+
 	return 0;
 }

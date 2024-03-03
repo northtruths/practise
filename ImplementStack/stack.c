@@ -23,7 +23,7 @@ void PushStack(SK* stack, DataType x)
 	assert(stack);
 	if (stack->top == stack->sizenum)//À©ÈÝ
 	{
-		int newsizenum = stack->sizenum == 0? 4 : stack->sizenum * 2;
+		int newsizenum = stack->sizenum == 0 ? 4 : stack->sizenum * 2;
 		DataType* temp = (DataType*)realloc(stack->arr, newsizenum * sizeof(DataType));
 		stack->sizenum = newsizenum;
 		if (temp == NULL)
@@ -39,14 +39,17 @@ void PushStack(SK* stack, DataType x)
 void PopStack(SK* stack)
 {
 	assert(stack);
+	assert(stack->top);
 	stack->top--;
 }
 bool EmptyStack(SK* stack)
 {
-	return SizeStack(stack)== 0;
+	assert(stack);
+	return stack->top == 0;
 }
 DataType TopStack(SK* stack)
 {
+	assert(stack);
 	return stack->arr[stack->top - 1];
 }
 int SizeStack(SK* stack)
