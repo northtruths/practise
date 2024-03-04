@@ -15,10 +15,10 @@ typedef struct stack
 	int sizenum;
 }SK;
 
-void InitStack(SK* stcak);
-void DestroyStack(SK* stack);
-void PushStack(SK* stack, DataType x);
-void PopStack(SK* stack);
-bool EmptyStack(SK* stack);
-DataType TopStack(SK* stack);
-int SizeStack(SK* stack);
+void InitStack(SK* stcak);//初始化
+void DestroyStack(SK* stack);//销毁
+void PushStack(SK* stack, DataType x);//入栈
+void PopStack(SK* stack);//出栈
+bool EmptyStack(SK* stack);//是否为空
+DataType TopStack(SK* stack);//尾元素
+int SizeStack(SK* stack);//有效元素个数

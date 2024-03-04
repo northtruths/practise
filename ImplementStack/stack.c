@@ -2,58 +2,58 @@
 
 #include"stack.h"
 
-void InitStack(SK* stack)
+void InitStack(SK* sk)
 {
-	assert(stack);
-	stack->sizenum = 0; 
-	stack->top = 0;//top的位置为尾元素的下一个
-	stack->arr = NULL;
+	assert(sk);
+	sk->sizenum = 0; 
+	sk->top = 0;//top的位置为尾元素的下一个
+	sk->arr = NULL;
 }
 
-void DestroyStack(SK* stack)
+void DestroyStack(SK* sk)
 {
-	assert(stack);
-	free(stack->arr);
-	stack->arr = NULL;
-	stack->sizenum = 0;
-	stack->top = 0;
+	assert(sk);
+	free(sk->arr);
+	sk->arr = NULL;
+	sk->sizenum = 0;
+	sk->top = 0;
 }
-void PushStack(SK* stack, DataType x)
+void PushStack(SK* sk, DataType x)
 {
-	assert(stack);
-	if (stack->top == stack->sizenum)//扩容
+	assert(sk);
+	if (sk->top == sk->sizenum)//扩容
 	{
-		int newsizenum = stack->sizenum == 0 ? 4 : stack->sizenum * 2;
-		DataType* temp = (DataType*)realloc(stack->arr, newsizenum * sizeof(DataType));
-		stack->sizenum = newsizenum;
+		int newsizenum = sk->sizenum == 0 ? 4 : sk->sizenum * 2;
+		DataType* temp = (DataType*)realloc(sk->arr, newsizenum * sizeof(DataType));
+		sk->sizenum = newsizenum;
 		if (temp == NULL)
 		{
 			perror("扩容失败！\n");
 			exit ;
 		}
-		stack->arr = temp;
+		sk->arr = temp;
 	}
-	stack->arr[stack->top] = x;
-	stack->top++;
+	sk->arr[sk->top] = x;
+	sk->top++;
 }
-void PopStack(SK* stack)
+void PopStack(SK* sk)
 {
-	assert(stack);
-	assert(stack->top);
-	stack->top--;
+	assert(sk);
+	assert(sk->top);
+	sk->top--;
 }
-bool EmptyStack(SK* stack)
+bool EmptyStack(SK* sk)
 {
-	assert(stack);
-	return stack->top == 0;
+	assert(sk);
+	return sk->top == 0;
 }
-DataType TopStack(SK* stack)
+DataType TopStack(SK* sk)
 {
-	assert(stack);
-	return stack->arr[stack->top - 1];
+	assert(sk);
+	return sk->arr[sk->top - 1];
 }
-int SizeStack(SK* stack)
+int SizeStack(SK* sk)
 {
-	assert(stack);
-	return stack->top;
+	assert(sk);
+	return sk->top;
 }
