@@ -14,6 +14,8 @@ void Prepare()
 	SetConsoleCursorInfo(handle, &curinfo);
 	//把控制台设为150：40， 其中100 列 、30 行来做地图
 	system("mode con cols=150 lines=40");
+	//名字 title
+	system("title 贪吃蛇");
 }
 
 void SetPos(short x, short y)//设置光标的坐标
@@ -86,8 +88,8 @@ void CreatSnake(AllGame* game)
 	game->snake = (Snake*)malloc(sizeof(Snake));//第一节手动创建
 	assert(game->snake);
 	game->snake->next = NULL;
-	game->snake->x = 2;
-	game->snake->y = 1;
+	game->snake->x = 4;
+	game->snake->y = 5;
 	game->lenth = 5;
 	Snake* pcur = 0;
 	for (int i = 0; i < 4; ++i)
@@ -104,13 +106,13 @@ void CreatSnake(AllGame* game)
 Snake* PrintSnake(AllGame* game)
 {
 	Snake* pcur = game->snake;
-	while (pcur->next->next)
+	while (pcur->next->next)//把尾节点的前一个节点位置保存，后面删尾用
 	{
 		SetPos(pcur->x, pcur->y);
 		wprintf(L"%c", BODY);
 		pcur = pcur->next;
 	}
-	SetPos(pcur->x, pcur->y);//把尾节点的前一个节点位置保存，后面删尾用
+	SetPos(pcur->x, pcur->y);
 	wprintf(L"%c", BODY);
 	SetPos(pcur->next->x, pcur->next->y);
 	wprintf(L"%c", BODY);
@@ -136,7 +138,7 @@ void SetFood(AllGame* game)
 	//在地图范围内随机生成食物，
 	//不能和地图重叠、不能生成在蛇上
 	//生成的坐标位置必须在偶数点上
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	int x, y;
 	again:
 	do
@@ -213,7 +215,7 @@ void MoveSnake(AllGame* game)
 {
 	jugdir(game);//判断当前移动方向
 	//两种情况，下一步有食物和没食物
-	//判断下一位置是否有食物
+	//判断下一位置是否有食物 
 	Snake* preptail = NULL;
 	if (jugfood(game))//若有食物，头插
 	{
@@ -223,9 +225,11 @@ void MoveSnake(AllGame* game)
 		new->next = game->snake;
 		game->snake = new;
 		PrintSnake(game);
+		game->lenth++;
+		game->score += 10;
 		SetFood(game);//吃掉再设置一个食物
 	}
-	else//若没有食物，头插，并将尾释放，并打印空格覆盖
+	else//若前面没有食物，头插，并将尾释放，并打印空格覆盖
 	{
 		Snake* new = (Snake*)malloc(sizeof(Snake));
 		//修正方向
@@ -277,15 +281,38 @@ void OtherFunc(AllGame* game)
 	}
 }
 
-int Suicide()
+void Suicide(AllGame* game)
 {
-	;
+	//因为此时判断是蛇已经移动之后，所以判断其头与其他部位是否碰撞即可
+	Snake* pcur = game->snake->next;//因为头和它后面两个不可能碰到，指向后面可以增加那么一丢丢效率
+	while (pcur)
+	{
+		if (pcur->x == game->snake->x && pcur->y == game->snake->y)
+		{
+			game->state = KILL_BY_SELF;
+			return;
+		}
+		pcur = pcur->next;
+	}
 }
+
+void Murder(AllGame* game)
+{
+	if (game->snake->x == 0 ||
+		game->snake->x == 98 ||
+		game->snake->y == 0 ||
+		game->snake->y == 29)
+	{
+		game->state = KILL_BY_WALL;
+		return;
+	}
+}
+
 void RunGame(AllGame* game)
 {
 	int state = OK;
 	//得分设置，提示语等
-	DisplayScore(game);
+
 	do
 	{
 		//没有食物则设置食物
@@ -294,9 +321,34 @@ void RunGame(AllGame* game)
 		//蛇的移动：正常\吃到食物
 		Sleep(game->speed);
 		MoveSnake(game);
+		DisplayScore(game);
 		//加速、减速、暂停 功能
 		OtherFunc(game);
 		//判输条件
-		//Suicide(game);
-	} while (game->state);
+		Suicide(game);
+		Murder(game);
+	} while (game->state == OK);
+}
+
+void FreeSnake(AllGame* game)
+{
+	Snake* del = game->snake;
+	while (del)
+	{
+		game->snake = game->snake->next;
+		free(del);
+		del = game->snake;
+	}
+}
+void EndGame(AllGame* game)
+{
+	FreeSnake(game);
+	SetPos(33, 12);
+	if (game->state == KILL_BY_SELF)
+		printf("你把自己创死了！真菜！");
+	else
+		printf("你一头撞死在了墙上！真菜！");
+	SetPos(33, 15);
+	printf("你想要再来一局吗? Y/N：");
+	
 }

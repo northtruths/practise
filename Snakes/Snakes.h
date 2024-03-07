@@ -32,7 +32,6 @@ typedef struct Snake
 enum State
 {
 	OK = 1,
-	ESC,
 	KILL_BY_WALL,
 	KILL_BY_SELF
 };
@@ -56,13 +55,13 @@ enum direction
 //整个游戏的维护
 typedef struct AllGame
 {
-	Snake* snake;
-	int score;
-	enum state state;
-	int speed;
-	Food food;
-	int lenth;
-	enum direction dir;
+	Snake* snake;//蛇的头节点的指针
+	int score;//得分
+	enum state state;//游戏的状态：正常（OK）、撞到自己、撞到墙
+	int speed;//蛇的速度（sleep的时间）
+	Food food;//食物的坐标和当前是否存在食物
+	int lenth;//蛇的长度
+	enum direction dir;//当前移动的方向
 
 }AllGame;
 
@@ -102,5 +101,14 @@ void MoveSnake(AllGame* game);
 //其他功能：暂停、加减速等
 void OtherFunc(AllGame* game);
 
-//撞到自己，返回flag判断自杀还是他杀
-int Suicide(game);
+//撞到自己
+void Suicide(AllGame* game);
+
+//撞墙
+void Murder(AllGame* game);
+
+//善后
+void EndGame(AllGame* game);
+
+//释放空间
+void FreeSnake(AllGame* game);
