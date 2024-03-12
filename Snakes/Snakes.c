@@ -193,11 +193,11 @@ bool jugfood(AllGame* game)
 {
 	if (game->dir == UP &&
 		game->snake->x == game->food.x &&
-		game->snake->y + 1 == game->food.y)
+		game->snake->y - 1 == game->food.y)
 		return true;
 	if (game->dir == DOWN &&
 		game->snake->x == game->food.x &&
-		game->snake->y - 1 == game->food.y)
+		game->snake->y + 1 == game->food.y)
 		return true;
 	if (game->dir == LEFT &&
 		game->snake->x - 2 == game->food.x &&
