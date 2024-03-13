@@ -181,11 +181,11 @@ void jugdir(AllGame* game)
 {
 	if (GetAsyncKeyState(VK_UP) && game->dir != DOWN)
 		game->dir = UP;
-	if (GetAsyncKeyState(VK_DOWN) && game->dir != UP)
+	else if (GetAsyncKeyState(VK_DOWN) && game->dir != UP)
 		game->dir = DOWN;
-	if (GetAsyncKeyState(VK_LEFT) && game->dir != RIGHT)
+	else if (GetAsyncKeyState(VK_LEFT) && game->dir != RIGHT)
 		game->dir = LEFT;
-	if (GetAsyncKeyState(VK_RIGHT) && game->dir != LEFT)
+	else if (GetAsyncKeyState(VK_RIGHT) && game->dir != LEFT)
 		game->dir = RIGHT;
 }
 
