@@ -16,11 +16,11 @@ void AdjustDown(HPDataType* a, int size, int parent)
 	{
 		//从左右孩子找出能力强的
 		//小堆小能力强，大堆大的能力强
-		if (schild + 1 < size && a[schild] < a[schild + 1])
+		if (schild + 1 < size && a[schild] > a[schild + 1])
 		{
 			schild++;
 		}
-		if (a[schild] > a[parent])
+		if (a[schild] < a[parent])
 		{
 			Swap(a, schild, parent);
 			parent = schild;//调整来到下一对父子
@@ -62,17 +62,56 @@ void HeapPop(HPDataType* hp, int size)
 	AdjustDown(hp, size, 0);
 }
 
-void HeapSort(int* a, int n)
+void HeapSort(int* a, int size)
 {
 	//建堆,从末叶子的父节点开始
 	//升序用大堆，降序用小堆
-	for (int i = (n - 1 - 1) / 2; i >= 0; --i)
+	for (int i = (size - 1 - 1) / 2; i >= 0; --i)
 	{
 		AdjustDown(a, 10, i);
 	}
 	//堆排序，用堆pop的思想将最大/最小的先交换到末尾，再调整
-	for (int j = n; j > 0; --j)
+	for (int j = size; j > 0; --j)
 	{
 		HeapPop(a, j);
 	}
+}
+
+void CreatFileData(int n, int max)
+{
+	FILE* file = fopen("C:/临时/data", "w");
+	srand((int)time(NULL));
+	while (n--)
+	{
+		fprintf(file, "%d\n", rand() % max);
+	}
+	fclose(file);
+}
+
+void PrintfTopK(int k)
+{//
+	//先建堆，利用堆顶是最大/最小的性质，
+	//  遍历整个数据将较小/较大的数据放进堆里
+
+	HPDataType* topk = (HPDataType*)malloc(sizeof(HPDataType) * k);
+	FILE* file = fopen("C:/临时/data", "r");
+	for (int i = 0; i < k; ++i)
+	{
+		fscanf(file, "%d", &topk[i]);
+	}
+	HeapSort(topk, k);//排小堆，最小的在堆顶，只要遇到更大的就入堆
+	HPDataType temp = 0;
+	while (fscanf(file, "%d", &temp) != EOF)
+	{
+		if (temp > topk[0])
+		{
+			topk[0] = temp;
+			AdjustDown(topk, k, 0);
+		}
+	}
+	for(int i = 0; i < k; ++i)
+	{
+		printf("%d ", topk[i]);
+	}
+	fclose(file);
 }

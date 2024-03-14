@@ -4,8 +4,11 @@
 
 int main()
 {
-	int test1[10] = { 3, 65, 1, 8, 4, 24, 86, 11, 1, 17 };
-	int n = sizeof(test1) / sizeof(test1[0]);
-	HeapSort(&test1, n);
+	//int test1[10] = { 3, 65, 1, 8, 4, 24, 86, 11, 1, 17 };
+	//int n = sizeof(test1) / sizeof(test1[0]);
+	//HeapSort(&test1, n);
+
+	CreatFileData(10000, 100000);
+	PrintfTopK(10);
 	return 0;
 }

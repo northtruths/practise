@@ -340,6 +340,7 @@ void FreeSnake(AllGame* game)
 		del = game->snake;
 	}
 }
+
 void EndGame(AllGame* game)
 {
 	FreeSnake(game);

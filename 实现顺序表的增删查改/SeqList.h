@@ -35,4 +35,4 @@ void SLCheck(SL* sl, int po);
 //查看整个顺序表
 void SLShow(SL* sl);
 //指定位置修改
-void SLRvise(SL* sl, DataType data, int po);
+void SLRvise(SL* sl, int po, DataType data);
