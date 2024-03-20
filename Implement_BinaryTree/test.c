@@ -4,27 +4,35 @@
 
 int main()
 {
-	BTDataType a[20] = { 'A','B','D','#','H','E','#','#','#','#','C','F','G','#','#','#','#' };
-	BTDataType b[20] = { 'a', 'b', 'c', 'd', 'e', 'f' };
-	BTNode* root = BinaryTreeCreate(a, 0, 17);
-
+	char a[] = { 'A','B','D','#','#','E','#','H','#','#','C','F','#','#','G','#','#' };
+	BTDataType b[] = { 'A', 'B', 'D', '#', '#', 'E', '#', '#', 'C', 'F', '#', '#', 'G', '#', '#' };
+	int i = 0;
+	//BTNode* root = BinaryTreeCreate(a, sizeof(a) / sizeof(a[0]), &i);
+	BTNode* root = BinaryTreeCreate(b, sizeof(b) / sizeof(b[0]), &i);
 	printf("TreeSize: %d\n", BinaryTreeSize(root));//8
 
-	printf("LeafSize: %d\n", BinaryTreeLeafSize(root));//3
+	printf("LeafSize: %d\n", BinaryTreeLeafSize(root));//4
 
-	printf("LeveKSize: %d\n", BinaryTreeLevelKSize(root, 3));//2
+	printf("LeveKSize: %d\n", BinaryTreeLevelKSize(root, 3));//4
 
 	printf("FindPosion: %p\n", BinaryTreeFind(root, 'M'));//NULL
 
 	printf("Prev: ");
-	BinaryTreePrevOrder(root);//AB#H#C##DEF##G###
+	BinaryTreePrevOrder(root);//ABD##E#H##CF##G##
 	printf("\n");
 	printf("In: ");
-	BinaryTreeInOrder(root);//BHCAFEGD
+	BinaryTreeInOrder(root);//DBEHAFCG
 	printf("\n");
 	printf("Post: ");
-	BinaryTreePostOrder(root);//CHBFGEDA
+	BinaryTreePostOrder(root);//DHEBFGCA
 	printf("\n");
-	
+	printf("Level: ");
+	BinaryTreeLevelOrder(root);//ABCDEFGH
+	printf("\n");
+
+	if (BinaryTreeComplete(root))
+		printf("是完全二叉树\n");
+	else
+		printf("不是完全二叉树\n");
 	return 0;
 }
