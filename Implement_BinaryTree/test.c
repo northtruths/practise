@@ -4,11 +4,11 @@
 
 int main()
 {
-	char a[] = { 'A','B','D','#','#','E','#','H','#','#','C','F','#','#','G','#','#' };
+	BTDataType a[] = { 'A','B','D','#','#','E','#','H','#','#','C','F','#','#','G','#','#' };
 	BTDataType b[] = { 'A', 'B', 'D', '#', '#', 'E', '#', '#', 'C', 'F', '#', '#', 'G', '#', '#' };
 	int i = 0;
-	//BTNode* root = BinaryTreeCreate(a, sizeof(a) / sizeof(a[0]), &i);
-	BTNode* root = BinaryTreeCreate(b, sizeof(b) / sizeof(b[0]), &i);
+	BTNode* root = BinaryTreeCreate(a, sizeof(a) / sizeof(a[0]), &i);
+	//BTNode* root = BinaryTreeCreate(b, sizeof(b) / sizeof(b[0]), &i);
 	printf("TreeSize: %d\n", BinaryTreeSize(root));//8
 
 	printf("LeafSize: %d\n", BinaryTreeLeafSize(root));//4

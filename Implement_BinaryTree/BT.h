@@ -55,6 +55,7 @@ void BinaryTreeLevelOrder(BTNode* root);
 // 判断二叉树是否是完全二叉树
 int BinaryTreeComplete(BTNode* root);
 
+
 // 初始化队列 
 void QueueInit(Queue* q);
 // 队尾入队列 

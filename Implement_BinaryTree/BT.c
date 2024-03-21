@@ -149,9 +149,12 @@ int BinaryTreeComplete(BTNode* root)
 		if (tfront == NULL)
 			flag = 1;
 		if (flag == 1 && tfront)
- 			return false;
+		{
+			QueueDestroy(&q);
+			return false;
+		}
 		QueuePop(&q);
-		//本身不为空且左右子树不为空入子树
+		//本身不为空且左右子树不为空,入子树
 		//本身不为空而左右子树为空，则入空
 		if (tfront && tfront->_left )
 			QueuePush(&q, tfront->_left);
