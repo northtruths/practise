@@ -35,18 +35,13 @@ void ShellSort(int* a, int n)
 	int gap = 3;
 	int begin = 0;
 	int cur = 0;
-	for (int i = gap; i > 0; --i)
+	for (int j = begin; j < n - gap; ++j)
 	{
-		for (int j = begin; j < n - gap; j += gap)
+		cur = j + gap;
+		while (cur > begin && a[cur] < a[cur - gap])
 		{
-			cur = j + gap;
-			while (cur > begin && a[cur] < a[cur - gap])
-			{
-				swap(a, cur, cur - gap);
-				cur -= gap;
-			}
+			swap(a, cur, cur - gap);
+			cur -= gap;
 		}
-		begin++;
 	}
-
 }
