@@ -32,16 +32,24 @@ void ShellSort(int* a, int n)
 	//思想：基于插入排序数组越接近有序效率越高，
 	// 提出使用一个 gap(一个数，与数组分组有关)，先将每组预排序，让整个数组先接近有序
 	//最后再插入排序（当 gap = 1 其实就是插入排序了）
-	int gap = 3;
-	int begin = 0;
-	int cur = 0;
-	for (int j = begin; j < n - gap; ++j)
+	int gap = n;
+	while (gap > 1)
 	{
-		cur = j + gap;
-		while (cur > begin && a[cur] < a[cur - gap])
+		gap = gap / 3 + 1;
+		int begin = 0;//每次排序开始的地方，也是每组数组的首元素，也是每个 cur 的最小位置
+		int cur = 0;//当前位置
+		for (int i = 0; i < gap; ++i)//需要排的组数
 		{
-			swap(a, cur, cur - gap);
-			cur -= gap;
+			for (int j = begin; j < n - gap; j += gap)
+			{
+				cur = j + gap;
+				while (cur > begin && a[cur] < a[cur - gap])
+				{
+					swap(a, cur, cur - gap);
+					cur -= gap;
+				}
+			}
+			++begin;
 		}
 	}
 }
