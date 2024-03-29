@@ -5,7 +5,7 @@
 void TestOP()
 {
 	srand((size_t)time(0));
-	const int N = 2000;
+	const int N = 10000000;
 	int* a1 = (int*)malloc(sizeof(int) * N);
 	int* a2 = (int*)malloc(sizeof(int) * N);
 	int* a3 = (int*)malloc(sizeof(int) * N);
@@ -43,11 +43,11 @@ void TestOP()
 	int end3 = clock();
 
 	int begin4 = clock();
-	HeapSort(a2, N);
+	HeapSort(a4, N);
 	int end4 = clock();
 
 	int begin5 = clock();
-	QuickSort(a2, 0, N - 1);
+	QuickSort(a5, 0, N - 1);
 	int end5 = clock();
 
 	int begin6 = clock();

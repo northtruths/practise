@@ -14,36 +14,36 @@ void InsertSort(int* a, int n)//O(N^2)
 	//思想：将数插入已有序的数组中，从后往前遍历(看情况吧？)，
 	// 符合顺序(大于前小于后 或相反)便插入
 	//从数组第一个元素开始视为有序数组(因为只有一个数)
-	//int begin = 0;
-	//int cur = begin;
-	//for (begin; begin < n - 1; ++begin)
-	//{
-	//	cur = begin + 1;
-	//	while (cur > 0 && a[cur] < a[cur - 1])
-	//	{
-	//		swap(&a[cur], &a[cur - 1]);
-	//		--cur;
-	//	}
-	//}
-	int gap = 1;
-	for (int i = 0; i < n - gap; ++i)
+	int begin = 0;
+	int cur = begin;
+	for (begin; begin < n - 1; ++begin)
 	{
-		int temp = a[i + gap];//此次待排的数据
-		int j = i;//寻找下标
-		while (j >= 0)
+		cur = begin + 1;
+		while (cur > 0 && a[cur] < a[cur - 1])
 		{
-			if (a[j] > temp)
-			{
-				a[j + gap] = a[j];
-				j -= gap;
-			}
-			else
-			{
-				break;
-			}
+			swap(&a[cur], &a[cur - 1]);
+			--cur;
 		}
-		a[j + gap] = temp;
 	}
+	//int gap = 1;
+	//for (int i = 0; i < n - gap; ++i)
+	//{
+	//	int temp = a[i + gap];//此次待排的数据
+	//	int j = i;//寻找下标
+	//	while (j >= 0)
+	//	{
+	//		if (a[j] > temp)
+	//		{
+	//			a[j + gap] = a[j];
+	//			j -= gap;
+	//		}
+	//		else
+	//		{
+	//			break;
+	//		}
+	//	}
+	//	a[j + gap] = temp;
+	//}
 }
 
 void ShellSort(int* a, int n)//O(N^1.3)
@@ -273,7 +273,7 @@ int PartSort3(int* a, int left, int right)//快排前后指针法(递归)
 	//虽说说指针法，其实不是必须用指针，只是思路和双指针很像，所以取的这个名字把？
 	if (left >= right)
 		return 0;
-	//OptQuickSort(a, left, right);
+	OptQuickSort(a, left, right);
 	int keyi = left;
 	int prev = left + 1;
 	int post = left;

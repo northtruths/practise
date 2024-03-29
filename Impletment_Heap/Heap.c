@@ -27,6 +27,8 @@ void Swap(HPDataType* a, int child, int parent)
 
 void AdjustUp(HPDataType* a, int child)
 {
+	//前提：本身为堆结构，适用已有一个堆，在堆尾添加数据
+	//思想：将父子进行比较然后交换，在将父节点作为子节点和它的父节点再此比较交换，达成向上调整保持堆结构
 	int parent = (child - 1) / 2;
 	while (child > 0)
 	{
@@ -83,6 +85,8 @@ int HeapEmpty(Heap* hp)
 
 void AdjustDown(HPDataType* a, int size)
 {
+	//前提：需要向下调整的节点的左右子树为堆
+	//思路：找出左右孩子“能力”大的交换，然后再子节点作父节点重复此步骤
 	int parent = 0;
 	int schild = parent * 2 + 1;//这里默认先是左孩子
 	while (schild < size)
