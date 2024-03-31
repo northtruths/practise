@@ -14,36 +14,39 @@ void InsertSort(int* a, int n)//O(N^2)
 	//思想：将数插入已有序的数组中，从后往前遍历(看情况吧？)，
 	// 符合顺序(大于前小于后 或相反)便插入
 	//从数组第一个元素开始视为有序数组(因为只有一个数)
-	int begin = 0;
-	int cur = begin;
-	for (begin; begin < n - 1; ++begin)
-	{
-		cur = begin + 1;
-		while (cur > 0 && a[cur] < a[cur - 1])
-		{
-			swap(&a[cur], &a[cur - 1]);
-			--cur;
-		}
-	}
-	//int gap = 1;
-	//for (int i = 0; i < n - gap; ++i)
+	//int begin = 0;
+	//int cur = begin;
+	//for (begin; begin < n - 1; ++begin)
 	//{
-	//	int temp = a[i + gap];//此次待排的数据
-	//	int j = i;//寻找下标
-	//	while (j >= 0)
+	//	cur = begin + 1;
+	//	while (cur > 0 && a[cur] < a[cur - 1])
 	//	{
-	//		if (a[j] > temp)
-	//		{
-	//			a[j + gap] = a[j];
-	//			j -= gap;
-	//		}
-	//		else
-	//		{
-	//			break;
-	//		}
+	//		swap(&a[cur], &a[cur - 1]);
+	//		int temp = a[cur - 1];
+	//		a[cur - 1] = a[cur];
+	//		a[cur] = temp;
+	//		--cur;
 	//	}
-	//	a[j + gap] = temp;
 	//}
+	int gap = 1;
+	for (int i = 0; i < n - gap; ++i)
+	{
+		int temp = a[i + gap];//此次待排的数据
+		int j = i;//向前待比较交换的坐标
+		while (j >= 0)
+		{
+			if (a[j] > temp)
+			{
+				a[j + gap] = a[j];
+				j -= gap;
+			}
+			else
+			{
+				break;
+			}
+		}
+		a[j + gap] = temp;
+	}
 }
 
 void ShellSort(int* a, int n)//O(N^1.3)
@@ -73,7 +76,7 @@ void ShellSort(int* a, int n)//O(N^1.3)
 		for (int i = 0; i < n - gap; ++i)
 		{
 			int temp = a[i + gap];//此次待排的数据
-			int j = i;//寻找下标
+			int j = i;//向前待比较交换的坐标
 			while( j >= 0)
 			{
 				if (a[j] > temp)
@@ -380,3 +383,128 @@ void QuickSortNonR(int* a, int left, int right)//快排(非递归)
 	}
 
 }
+
+void MergeProcess(int* a, int* temp, int begin, int end)//begin,end为本次需归并的数组总的首尾下标
+{
+	if (begin == end)
+		return;
+	int ti = begin;//temp 的下标,从本次归并数组的首元素开始
+
+	int begin1 = begin;
+	int end1 = begin + (end - begin) / 2;
+	int begin2 = end1 + 1;
+	int end2 = end;
+
+
+	//printf("[%d, %d] [%d, %d]\n", begin1, end1, begin2, end2);//调试
+	
+	//每个数组都可以分为
+	//[begin1, end1][end1 + 1, end2],先把左右数组排有序才轮到本次数组
+	MergeProcess(a, temp, begin1, end1);
+	MergeProcess(a, temp, end1 + 1, end2);
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (a[begin1] <= a[begin2])
+		{
+			temp[ti++] = a[begin1++];
+		}
+		else
+		{
+			temp[ti++] = a[begin2++];
+		}
+	}
+
+		while (begin1 <= end1)
+		{
+			temp[ti++] = a[begin1++];
+		}
+
+		while (begin2 <= end2)
+		{
+			temp[ti++] = a[begin2++];
+		}
+
+		memcpy(a + begin, temp + begin, sizeof(int) * (end - begin + 1));
+
+}
+
+//因为逻辑上可以看作是二叉树，把临时数组拷贝回去时，所有同一层被拷贝的数组合起来就是数组个数次(O(N))
+//然后要归并的层数就是把数组二叉分下去的层数(O(logN))，所以合计时间复杂度(O(N*logN))
+void MergeSort(int* a, int n)//(递归)
+{
+	//思想：将两个有序数组从头遍历比较，依次按顺序放进一个新数组，
+	// 再放回原数组(因为需要递归保存部分顺序所以要开新空间)
+	//因为必须是两个有序数组才能归并，所以采用分治/递归的思想先把数组分左右两部分进行归并，如此递归下去
+
+	int* temp = (int*)malloc(sizeof(a[0]) * n);
+
+	MergeProcess(a, temp, 0, n - 1);
+
+	free(temp);
+	temp = NULL;
+}
+
+void MergeSortNonR(int* a, int n)
+{
+	//思想：因为归并的递归可以说是二叉树的后序遍历，无法使用前序(栈)中序(队列)模拟
+	// 所以用循环用层序模拟，不过需要逆向模拟直接模拟回归过程
+
+	int* temp = (int*)malloc(sizeof(a[0]) * n);
+	int ti = 0;
+
+	int gap = 1;//本次拿去归并的数组元素
+	while(gap < n)//最后一次排序就是将整个数组分为两个的情况，此时 gap 等于数组元素的一半向上取整
+	{
+		//每层的排序
+		int begin = 0;
+		int end = 0;//两个数组合并起来的首尾下标
+		for (begin = 0; begin <= n - 1; begin += 2 * gap)
+		{
+			end = begin + 2 * gap - 1;
+			//每两组进行排序
+			int begin1 = begin;
+			int end1 = begin1 + (end - begin) / 2;
+			int begin2 = end1 + 1;
+			int end2 = end;
+			ti = begin1;
+			if (end1 > n - 1 || begin2 > n - 1)
+				break;
+			if (end2 > n - 1)
+			{
+				end2 = n - 1;
+				end = end2;
+			}
+			//printf("[%d, %d] [%d, %d]    ", begin1, end1, begin2, end2);
+
+			while (begin1 <= end1 && begin2 <= end2)//每两组的排序
+			{
+
+				if (a[begin1] <= a[begin2])
+				{
+					temp[ti++] = a[begin1++];
+				}
+				else
+				{
+					temp[ti++] = a[begin2++];
+				}
+			}
+
+			while (begin1 <= end1)
+			{
+				temp[ti++] = a[begin1++];
+			}
+
+			while (begin2 <= end2)
+			{
+				temp[ti++] = a[begin2++];
+			}
+
+			memcpy(a + begin, temp + begin, sizeof(int) * (end - begin + 1));
+
+		}
+		//printf("\n");
+		gap *= 2;
+	}
+
+}
+

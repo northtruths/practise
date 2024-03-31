@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<string.h>
 
 #include"stack.h"
 
@@ -33,3 +34,8 @@ void QuickSort(int* a, int left, int right);
 
 // 快速排序 非递归实现
 void QuickSortNonR(int* a, int left, int right);
+
+//归并排序
+void MergeSort(int* a, int n);
+//归并排序(非递归)
+void MergeSortNonR(int* a, int n);
