@@ -88,6 +88,14 @@ void MergeSortNonRTest()
 	Printf(a, sizeof(a) / sizeof(a[0]));
 }
 
+void CountSortTest()
+{
+	int a[] = { 8, 1, 4, 2, 84, 16, 2, 4, 9, 7, 5, 6, 3, 0 , 10 };
+	Printf(a, sizeof(a) / sizeof(a[0]));
+	CountSort(a, sizeof(a) / sizeof(a[0]));
+	Printf(a, sizeof(a) / sizeof(a[0]));
+}
+
 void TestOP()
 {
 	srand((size_t)time(0));
@@ -141,7 +149,7 @@ void TestOP()
 	int end5 = clock();
 
 	int begin6 = clock();
-	MergeSortNonR(a6, N);
+	MergeSort(a6, N);
 	int end6 = clock();
 
 
@@ -164,7 +172,7 @@ void TestOP()
 
 int main()
 {
-	TestOP();
+	//TestOP();
 
 	//InsertSortTest();
 	//ShellSortTest();
@@ -175,5 +183,6 @@ int main()
 	//QuickSortNonRTest();
 	//MergeSortTest();
 	//MergeSortNonRTest();
+	CountSortTest();
 	return 0;
 }

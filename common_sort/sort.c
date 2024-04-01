@@ -11,7 +11,7 @@ void swap(int* left, int* right)
 
 void InsertSort(int* a, int n)//O(N^2)
 {
-	//Ë¼Ïë£º½«Êý²åÈëÒÑÓÐÐòµÄÊý×éÖÐ£¬´ÓºóÍùÇ°±éÀú(¿´Çé¿ö°É£¿)£¬
+	//Ë¼Â·£º½«Êý²åÈëÒÑÓÐÐòµÄÊý×éÖÐ£¬´ÓºóÍùÇ°±éÀú(¿´Çé¿ö°É£¿)£¬
 	// ·ûºÏË³Ðò(´óÓÚÇ°Ð¡ÓÚºó »òÏà·´)±ã²åÈë
 	//´ÓÊý×éµÚÒ»¸öÔªËØ¿ªÊ¼ÊÓÎªÓÐÐòÊý×é(ÒòÎªÖ»ÓÐÒ»¸öÊý)
 	//int begin = 0;
@@ -51,7 +51,7 @@ void InsertSort(int* a, int n)//O(N^2)
 
 void ShellSort(int* a, int n)//O(N^1.3)
 {
-	//Ë¼Ïë£º»ùÓÚ²åÈëÅÅÐòÊý×éÔ½½Ó½üÓÐÐòÐ§ÂÊÔ½¸ß£¬
+	//Ë¼Â·£º»ùÓÚ²åÈëÅÅÐòÊý×éÔ½½Ó½üÓÐÐòÐ§ÂÊÔ½¸ß£¬
 	// Ìá³öÊ¹ÓÃÒ»¸ö gap(Ò»¸öÊý£¬ÓëÊý×é·Ö×éÓÐ¹Ø)£¬ÏÈ½«Ã¿×éÔ¤ÅÅÐò£¬ÈÃÕû¸öÊý×éÏÈ½Ó½üÓÐÐò
 	//×îºóÔÙ²åÈëÅÅÐò£¨µ± gap = 1 ÆäÊµ¾ÍÊÇ²åÈëÅÅÐòÁË£©
 	int gap = n;
@@ -98,7 +98,7 @@ void ShellSort(int* a, int n)//O(N^1.3)
 
 void SelectSort(int* a, int n)//O(N^2)
 {
-	//Ë¼Ïë£ºÃ¿´Î´Ó´ýÅÅÊý¾ÝÖÐÕÒ³ö×î´ó/×îÐ¡µÄÊý·ÅÔÚÐòÁÐµÄÆðÊ¼Î»ÖÃ
+	//Ë¼Â·£ºÃ¿´Î´Ó´ýÅÅÊý¾ÝÖÐÕÒ³ö×î´ó/×îÐ¡µÄÊý·ÅÔÚÐòÁÐµÄÆðÊ¼Î»ÖÃ
 	//ÓÅ»¯£ºÃ¿´ÎÑ­»·°Ñ×î´óºÍ×îÐ¡Öµ¶¼ÕÒ³öÀ´£¬·ÅÔÚÐòÁÐµÄÆðÊ¼ºÍÄ©Î²Î»ÖÃ
 	int begin = 0, end = n - 1, curi = begin;//ÆðÊ¼,Ä©Î²,µ±Ç°
 	while (begin < end)
@@ -179,7 +179,7 @@ void HeapSort(int* a, int n)//( O(N*logN) ) -> ½¨¶Ñ(N) + ÏòÏÂµ÷Õû(N*logN)
 
 void BubbleSort(int* a, int n)//(O(N^2))
 {
-	//Ë¼Ïë£ºÁ½Á½±È½Ï£¬½«½Ï´óµÄ/½ÏÐ¡½»»»µ½ºóÃæÒ»¸ö£¬
+	//Ë¼Â·£ºÁ½Á½±È½Ï£¬½«½Ï´óµÄ/½ÏÐ¡½»»»µ½ºóÃæÒ»¸ö£¬
 	// Ò»ÂÖÏÂÀ´¾Í°Ñµ±Ç°×î´ó/×îÐ¡µÄÅÅµ½ºóÃæÈ¥ÁË
 	int num = n - 1;//×Ü¹²ÒªÅÅµÄÂÖÊý
 	int size = n - 1;//µ±Ç°ÂÖÒªÅÅµÄ´ÎÊý
@@ -202,7 +202,7 @@ void BubbleSort(int* a, int n)//(O(N^2))
 
 int PartSort1(int* a, int left, int right)//¿ìÅÅ hoare °æ(µÝ¹é)
 {
-	//Ë¼Ïë£º½«Êý×éÍ·ÔªËØ»òÎ²ÔªËØ×÷Îª key£¬Á½¸öÏÂ±ê´ÓÊý×éÍ·ºÍÎ²¿ªÊ¼±éÀúÊý×é
+	//Ë¼Â·£º½«Êý×éÍ·ÔªËØ»òÎ²ÔªËØ×÷Îª key£¬Á½¸öÏÂ±ê´ÓÊý×éÍ·ºÍÎ²¿ªÊ¼±éÀúÊý×é
 	//±ØÐëÀë key Ô¶µÄÒ»·½ÏÈ×ß(ÕâÑù²Å¿ÉÒÔ±£Ö¤×óÓÒÏÂ±êÏàÓöÊ±Óë key ½»»»ÊÇÕýÈ·µÄ),×óÏÂ±êÓöµ½±È key ´óµÄÍ£ÏÂ£¬ÓÒ×ø±êÓöµ½±È key Ð¡µÄÍ£ÏÂ£¬
 	//Á½±ß¶¼Í£ÏÂÊ±½»»»£¬ÕâÑù´óµÄ¾Íµ½ key ÓÒ±ß£¬Ð¡µÄ¾Íµ½ key ×ó±ßÁË£¬È»ºó×óÓÒÏàÓöÊ±µÄÎ»ÖÃ¾ÍÊÇ key µÄÕýÈ·Ë³ÐòÎ»ÖÃ
 	//×îºó½«Êý×é´ÓÏÖÔÚ key µÄÎ»ÖÃ½«Êý×é·ÖÎªÁ½¸öÊý×é£¬½«ÕâÁ½¸öÊý×éÖØ¸´ÉÏÊö²½Öè£¬Ò²¾ÍÊÇµÝ¹é
@@ -236,7 +236,7 @@ int PartSort1(int* a, int left, int right)//¿ìÅÅ hoare °æ(µÝ¹é)
 
 int PartSort2(int* a, int left, int right)//¿ìÅÅÍÚ¿Ó·¨(µÝ¹é)
 {
-	//Ë¼Â·£º´Ë·¨ÊÇ»ùÓÚ hoare °æ±¾µÄË¼Ïë£¬½«Ê×»òÎ²×÷Îª key£¬²¢½«Æä´æÔÚÁÙÊ±±äÁ¿Àï
+	//Ë¼Â·£º´Ë·¨ÊÇ»ùÓÚ hoare °æ±¾µÄË¼Â·£¬½«Ê×»òÎ²×÷Îª key£¬²¢½«Æä´æÔÚÁÙÊ±±äÁ¿Àï
 	//ÊÓÎª½«Õâ¸öÎ»ÖÃµÄÊýÈ¡³ö£¬ÐÎ³ÉÒ»¸ö¿ÓÎ»£¬ÁíÒ»¸ö·½ÏòµÄÏÂ±êÕÒ´ó/Ð¡£¬
 	// ½«ÕÒµ½µÄÊýÌî½øÕâ¸ö¿ÓÎ»£¬²¢½«ÄÇ¸öÎ»ÖÃÊÓÎªÐÂµÄ¿ÓÎ»£¬Ñ­»·ÖªµÀÏàÓö£¬ÏàÓöÎ»ÖÃ¼´ key ÕæÕýµÄÎ»ÖÃ
 	//×îºóºÍ hoare °æÒ»Ñù£¬µÝ¹é
@@ -328,7 +328,7 @@ int OptQuickSort(int* a, int left, int right)//¿ìÅÅµÄÓÅ»¯£¬ÕâÀïÖ±½Ó°ÑÈýÊýµÄÖÐÊý·
 //µ«Òò×î»µÇé¿öÔÚËæ»úÇé¿öÏÂ¼¸ºõ²»»á·¢Éú£¬²¢ÇÒ¿ÉÒÔÓÃÈýÊýÈ¡ÖÐÓÅ»¯µô´ËÇé¿ö£¬ËùÒÔÕæÊµÇé¿ö£ºO(N*logN)
 void QuickSort(int* a, int left, int right)
 {
-	//Ë¼Ïë£º´Ó´ýÅÅÊý¾ÝÖÐÑ¡ÔñÒ»¸ö key£¬ºóÐøÍ¨¹ý¸÷ÖÖ·½·¨£¬
+	//Ë¼Â·£º´Ó´ýÅÅÊý¾ÝÖÐÑ¡ÔñÒ»¸ö key£¬ºóÐøÍ¨¹ý¸÷ÖÖ·½·¨£¬
 	// ´ïµ½ -> Óöµ½±È key Ð¡Êý¾Ý»á±»ÒÆµ½ key ÕýÈ·Ë³ÐòÎ»ÖÃµÄ×ó±ß£¬±È key ´óµÄÔÚÓÒ±ß£¬×îºó key ½«»áÒÆ¶¯µ½ÕýÈ·Ë³ÐòÎ»ÖÃ
 	
 	//PartSort1(a, left, right);
@@ -338,7 +338,7 @@ void QuickSort(int* a, int left, int right)
 
 void QuickSortNonR(int* a, int left, int right)//¿ìÅÅ(·ÇµÝ¹é)
 {
-	//Ë¼Ïë£º½«µÝ¹é¸ÄÎª·ÇµÝ¹é£¬µÝ¹éµÄÒ»¸öÌØµãÊÇºó½øÏÈ³ö£¬ºÍÕ»ÌØµãÒ»Ñù£¬ËùÒÔÓÃÕ»´úÌæµÝ¹é
+	//Ë¼Â·£º½«µÝ¹é¸ÄÎª·ÇµÝ¹é£¬µÝ¹éµÄÒ»¸öÌØµãÊÇºó½øÏÈ³ö£¬ºÍÕ»ÌØµãÒ»Ñù£¬ËùÒÔÓÃÕ»´úÌæµÝ¹é
 	// ¶øµÝ¹éºËÐÄ´«µÝÐÂµÄ²ÎÊý£¬×÷ÓÃÍ¬Ò»¸öº¯Êý£¬ÎÒÃÇ¾ÍÓÃÕ»´æ²ÎÊý,³öÕ»Ä£Äâ´«²Î£¬Ñ­»·Ä£ÄâµÝÍÆºÍ»Ø¹é
 	
 	//Ã¿Ñ­»·Ò»´Î½«×óÓÒÇø¼ä´æÈëÕ»£¬Í¬Ê±³öÒ»´ÎÕ»½øÐÐÊ¹ÓÃ
@@ -432,9 +432,9 @@ void MergeProcess(int* a, int* temp, int begin, int end)//begin,endÎª±¾´ÎÐè¹é²¢µ
 //È»ºóÒª¹é²¢µÄ²ãÊý¾ÍÊÇ°ÑÊý×é¶þ²æ·ÖÏÂÈ¥µÄ²ãÊý(O(logN))£¬ËùÒÔºÏ¼ÆÊ±¼ä¸´ÔÓ¶È(O(N*logN))
 void MergeSort(int* a, int n)//(µÝ¹é)
 {
-	//Ë¼Ïë£º½«Á½¸öÓÐÐòÊý×é´ÓÍ·±éÀú±È½Ï£¬ÒÀ´Î°´Ë³Ðò·Å½øÒ»¸öÐÂÊý×é£¬
+	//Ë¼Â·£º½«Á½¸öÓÐÐòÊý×é´ÓÍ·±éÀú±È½Ï£¬ÒÀ´Î°´Ë³Ðò·Å½øÒ»¸öÐÂÊý×é£¬
 	// ÔÙ·Å»ØÔ­Êý×é(ÒòÎªÐèÒªµÝ¹é±£´æ²¿·ÖË³ÐòËùÒÔÒª¿ªÐÂ¿Õ¼ä)
-	//ÒòÎª±ØÐëÊÇÁ½¸öÓÐÐòÊý×é²ÅÄÜ¹é²¢£¬ËùÒÔ²ÉÓÃ·ÖÖÎ/µÝ¹éµÄË¼ÏëÏÈ°ÑÊý×é·Ö×óÓÒÁ½²¿·Ö½øÐÐ¹é²¢£¬Èç´ËµÝ¹éÏÂÈ¥
+	//ÒòÎª±ØÐëÊÇÁ½¸öÓÐÐòÊý×é²ÅÄÜ¹é²¢£¬ËùÒÔ²ÉÓÃ·ÖÖÎ/µÝ¹éµÄË¼Â·ÏÈ°ÑÊý×é·Ö×óÓÒÁ½²¿·Ö½øÐÐ¹é²¢£¬Èç´ËµÝ¹éÏÂÈ¥
 
 	int* temp = (int*)malloc(sizeof(a[0]) * n);
 
@@ -444,9 +444,9 @@ void MergeSort(int* a, int n)//(µÝ¹é)
 	temp = NULL;
 }
 
-void MergeSortNonR(int* a, int n)
+void MergeSortNonR(int* a, int n)//(O(N*logN))
 {
-	//Ë¼Ïë£ºÒòÎª¹é²¢µÄµÝ¹é¿ÉÒÔËµÊÇ¶þ²æÊ÷µÄºóÐò±éÀú£¬ÎÞ·¨Ê¹ÓÃÇ°Ðò(Õ»)ÖÐÐò(¶ÓÁÐ)Ä£Äâ
+	//Ë¼Â·£ºÒòÎª¹é²¢µÄµÝ¹é¿ÉÒÔËµÊÇ¶þ²æÊ÷µÄºóÐò±éÀú£¬ÎÞ·¨Ê¹ÓÃÇ°Ðò(Õ»)ÖÐÐò(¶ÓÁÐ)Ä£Äâ
 	// ËùÒÔÓÃÑ­»·ÓÃ²ãÐòÄ£Äâ£¬²»¹ýÐèÒªÄæÏòÄ£ÄâÖ±½ÓÄ£Äâ»Ø¹é¹ý³Ì
 
 	int* temp = (int*)malloc(sizeof(a[0]) * n);
@@ -508,3 +508,33 @@ void MergeSortNonR(int* a, int n)
 
 }
 
+void CountSort(int* a, int n)
+{
+	//Ë¼Â·£ºÈ¡´ýÅÅÊý¾Ý´óÐ¡µÄ·¶Î§£¬¿ª±ÙÒ»¸ö´óÐ¡Îª·¶Î§µÄÐÂÊý×é
+	//±éÀú´ýÅÅÊý¾Ý£¬Ã¿´Î½«Êý¾ÝËù¶ÔÓ¦µÄÐÂÊý×éÓ³Ïñ(Ïà¶Ô×îÐ¡Êý¾ÝµÄÎ»ÖÃ)¼ÓÒ»£¬Ò²¾ÍÊÇ¼ÆÊý
+	//È»ºó¸ù¾ÝËù¼ÇÂ¼µÄ¸öÊý£¬ÓÐ¼¸¸ö¾Í·Å¼¸¸ö¶ÔÓ¦Êý¾Ýµ½Êý×é£¬ÅÅÐòÍê³É
+	//×¢Òâ£º¼ÆÊýÅÅÐòÖ»ÊÊÓÃÓÚÅÅÕûÐÍ£¬ÒòÎªÆäËû¸÷ÖÖÊý¾Ý¶¼Ã»·¨¸ù¾ÝÓ³Éä¶ø¼ÆÊýÅÅÐò
+
+	int max = a[0], min = a[0];
+	for (int i = 0; i < n; ++i)
+	{
+		if (a[i] > max)
+			max = a[i];
+		if (a[i] < min)
+			min = a[i];
+	}
+	int* temp = (int*)calloc(max - min + 1, sizeof(int));//calloc¿ªÊý×é£¬ÒòÎªÐèÒªÕû¸öÊý×é³õÊ¼»¯
+	for (int i = 0; i < n; ++i)
+	{
+		temp[(a[i] - min)] += 1;
+	}
+
+	int ai = 0;//Ô­Êý×éÏÂ±ê£¬ÓÃÀ´·ÅÊý¾Ý
+	for (int i = 0; i < max - min + 1; ++i)
+	{
+		while(temp[i]--)//¼ÆÊý²»ÎªÁã¾ÍËµÃ÷ÓÐ´ËÊý¾Ý
+		{
+			a[ai++] = i + min;
+		}
+	}
+}
