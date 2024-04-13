@@ -16,11 +16,11 @@ typedef struct node //每个多项式
 node* ListCreat(int* n);
 
 //多项式排序（将多项式链表中每个多项式按指数从小到大排序）
-//参数为多项式个数
-void ListSort(int n);
+//参数为多项式头结点和多项式个数
+void ListSort(node* head, int n);
 
-//多项式相加，返回第一个多项式链表的头结点
-node* ListAdd(node* p1, node* p2);
+//多项式相加，返回一个新的多项式链表
+node* ListAdd(node* p1, node* p2, int n1, int n2);
 
 //多项式输出（打印多项式）
 void ListPrint(node* p);
