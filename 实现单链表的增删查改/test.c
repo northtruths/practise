@@ -13,7 +13,7 @@ int main()
 	SLTPushFront(&newphead, 4);//4213
 	//SLTPrintf(newphead);
 	//查找
-	SLTNode* pos = SLTFind(newphead, 1);
+	SLTNode* pos = SLTFind(newphead, 10);
 	//指定位置前插入
 	SLTInsert(&newphead, pos, 5);//42513
 	//指定位置后插入
