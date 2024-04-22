@@ -113,11 +113,14 @@ bool Data::operator>(const Data& d) const
 			{
 				if (_month == d._month)
 				{
-					return _day - d._day;
+					return (_day - d._day) > 0;
 				}
+				else
 				return false;
 			}
 		}
+		else
+			return false;
 	}
 
 	return true;
