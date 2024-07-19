@@ -138,50 +138,50 @@
 ////EEE
 
 
-
-#include <iostream>
-#include<vector>
-#include<cmath>
-using namespace std;
-
-long long index(long long m, long long n)
-{
-    if (n == 0 || m == n)
-        return 1;
-
-    long long a = 1, b = 1;
-    for (long long i = 1; i <= n; ++i)
-    {
-        b *= i;
-    }
-    while(n--)
-    {
-        a *= m--;
-    }
-
-    return a / b;
-}
-int main()
-{
-    long long n = 0;
-    cin >> n;
-    vector<vector<long long>> vv(n);
-    vv[0].push_back(1);
-    for (long long i = 1; i < n; ++i)
-    {
-        for (long long j = 0; j <= i; ++j)
-        {
-            
-            vv[i].push_back(index(i, j));
-        }
-    }
-    for (long long i = 0; i < n; ++i)
-    {
-        for (long long j = 0; j <= i; ++j)
-        {
-            printf("%5lld", vv[i][j]);
-        }
-        cout << '\n';
-    }
-
-}
+//Ñî»ÔÈý½Ç
+//#include <iostream>
+//#include<vector>
+//#include<cmath>
+//using namespace std;
+//
+//long long index(long long m, long long n)
+//{
+//    if (n == 0 || m == n)
+//        return 1;
+//
+//    long long a = 1, b = 1;
+//    for (long long i = 1; i <= n; ++i)
+//    {
+//        b *= i;
+//    }
+//    while(n--)
+//    {
+//        a *= m--;
+//    }
+//
+//    return a / b;
+//}
+//int main()
+//{
+//    long long n = 0;
+//    cin >> n;
+//    vector<vector<long long>> vv(n);
+//    vv[0].push_back(1);
+//    for (long long i = 1; i < n; ++i)
+//    {
+//        for (long long j = 0; j <= i; ++j)
+//        {
+//            
+//            vv[i].push_back(index(i, j));
+//        }
+//    }
+//    for (long long i = 0; i < n; ++i)
+//    {
+//        for (long long j = 0; j <= i; ++j)
+//        {
+//            printf("%5lld", vv[i][j]);
+//        }
+//        cout << '\n';
+//    }
+//
+//}
