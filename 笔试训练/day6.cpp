@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 
+#include<algorithm>
 //#include<iostream>
 //#include<string>
 //#include<cmath>
@@ -148,104 +149,104 @@
 
 
 
-#include<iostream>
-#include<string>
-using namespace std;
-
-    /**
-     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
-     *
-     *
-     * @param s string字符串 第一个整数
-     * @param t string字符串 第二个整数
-     * @return string字符串
-     */
-    string Add(string s, string t) {
-        if (s.empty() || t.empty())
-        {
-            if (s.empty() && t.empty())
-            {
-                return "";
-            }
-            else if (s.empty())
-            {
-                return t;
-            }
-            else
-            {
-                return s;
-            }
-
-        }
-        reverse(s.begin(), s.end());
-        reverse(t.begin(), t.end());
-        string& long_s = s.size() > t.size() ? s : t;
-        string& short_s = s.size() > t.size() ? t : s;
-
-        string ret;
-        int add = 0;
-        for (int i = 0; i < short_s.size(); ++i)
-        {
-            int a = s[i] - 48;
-            int b = t[i] - 48;
-            ret += (a + b + add) % 10;
-            add = (a + b + add) / 10;
-        }
-        for (int i = short_s.size(); i < long_s.size(); ++i)
-        {
-            int a = long_s[i] - 48;
-            ret += (a + add) % 10;
-            add = (a + add) / 10;
-        }
-        if (add != 0)
-        {
-            ret += add;
-        }
-        reverse(ret.begin(), ret.end());
-        for (auto& e : ret)
-        {
-            e += 48;
-        }
-        return ret;
-    }
-    string solve(string s, string t) {
-        if (s == "0" || t == "0")
-            return "0";
-        reverse(s.begin(), s.end());
-        reverse(t.begin(), t.end());
-        string& long_s = s.size() > t.size() ? s : t;
-        string& short_s = s.size() > t.size() ? t : s;
-
-        string ret;
-        string ADD;
-        int add = 0;
-        for (int i = 0; i < short_s.size(); ++i)
-        {
-            int a = short_s[i] - 48;
-            for (int j = 0; j < long_s.size(); ++j)
-            {
-                int b = long_s[j] - 48;
-                ADD += (a * b + add) % 10;
-                add = (a * b + add) / 10;
-            }
-            reverse(ADD.begin(), ADD.end());
-            for (auto& e : ADD)
-            {
-                e += 48;
-            }
-            ret = Add(ret, ADD);
-            ADD.clear();
-            reverse(long_s.begin(), long_s.end());
-            long_s += '0';//乘10
-            reverse(long_s.begin(), long_s.end());
-        }
-        return ret;
-    }
-
-    int main()
-    {
-        string s1("15");
-        string s2("111");
-        cout << solve(s1, s2) << endl;
-        return 0;
-    }
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//
+//    /**
+//     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+//     *
+//     *
+//     * @param s string字符串 第一个整数
+//     * @param t string字符串 第二个整数
+//     * @return string字符串
+//     */
+//    string Add(string s, string t) {
+//        if (s.empty() || t.empty())
+//        {
+//            if (s.empty() && t.empty())
+//            {
+//                return "";
+//            }
+//            else if (s.empty())
+//            {
+//                return t;
+//            }
+//            else
+//            {
+//                return s;
+//            }
+//
+//        }
+//        reverse(s.begin(), s.end());
+//        reverse(t.begin(), t.end());
+//        string& long_s = s.size() > t.size() ? s : t;
+//        string& short_s = s.size() > t.size() ? t : s;
+//
+//        string ret;
+//        int add = 0;
+//        for (int i = 0; i < short_s.size(); ++i)
+//        {
+//            int a = s[i] - 48;
+//            int b = t[i] - 48;
+//            ret += (a + b + add) % 10;
+//            add = (a + b + add) / 10;
+//        }
+//        for (int i = short_s.size(); i < long_s.size(); ++i)
+//        {
+//            int a = long_s[i] - 48;
+//            ret += (a + add) % 10;
+//            add = (a + add) / 10;
+//        }
+//        if (add != 0)
+//        {
+//            ret += add;
+//        }
+//        reverse(ret.begin(), ret.end());
+//        for (auto& e : ret)
+//        {
+//            e += 48;
+//        }
+//        return ret;
+//    }
+//    string solve(string s, string t) {
+//        if (s == "0" || t == "0")
+//            return "0";
+//        reverse(s.begin(), s.end());
+//        reverse(t.begin(), t.end());
+//        string& long_s = s.size() > t.size() ? s : t;
+//        string& short_s = s.size() > t.size() ? t : s;
+//
+//        string ret;
+//        string ADD;
+//        int add = 0;
+//        for (int i = 0; i < short_s.size(); ++i)
+//        {
+//            int a = short_s[i] - 48;
+//            for (int j = 0; j < long_s.size(); ++j)
+//            {
+//                int b = long_s[j] - 48;
+//                ADD += (a * b + add) % 10;
+//                add = (a * b + add) / 10;
+//            }
+//            reverse(ADD.begin(), ADD.end());
+//            for (auto& e : ADD)
+//            {
+//                e += 48;
+//            }
+//            ret = Add(ret, ADD);
+//            ADD.clear();
+//            reverse(long_s.begin(), long_s.end());
+//            long_s += '0';//乘10
+//            reverse(long_s.begin(), long_s.end());
+//        }
+//        return ret;
+//    }
+//
+//    int main()
+//    {
+//        string s1("15");
+//        string s2("111");
+//        cout << solve(s1, s2) << endl;
+//        return 0;
+//    }
