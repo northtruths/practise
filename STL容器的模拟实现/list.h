@@ -1,6 +1,6 @@
 #pragma once
 
-namespace bit
+namespace bit_list
 {
 	template<class T = int()>
 	struct ListNode
@@ -129,6 +129,34 @@ namespace bit
 			}
 		}
 
+		list(iterator<T> frist, iterator<T> last)
+		{
+			Headcreate();
+			ListNode<T>* pre = _head;
+			ListNode<T>* cur = _head;
+			for(auto& i = frist; i != last; ++i)
+			{
+				cur = new ListNode<T>(*i);
+				_head->_prev = cur;
+				pre->_next = cur;
+				cur->_prev = pre;
+				cur->_next = _head;
+				pre = cur;
+				++_size;
+			}
+		}
+
+		list(list<T>& l)//没给传进来的参数加const，因为加了就得再写一个const_iterator，麻烦，不写了
+		{
+			Headcreate();
+			list(l.begin(), l.end());
+		}
+
+		list<T>& operator=(const list<T>& l)
+		{
+			list(l);
+			return *this;
+		}
 		~list()
 		{
 			iterator<T> cur(_head->_next);
@@ -181,8 +209,22 @@ namespace bit
 
 		////////////////////////////////////////////////////////////////////////////////////////////
 		// List Access
-
-
+		T& front()
+		{
+			return *this->begin();
+		}
+		const T& front() const
+		{
+			return (const T)front();
+		}
+		T& back()
+		{
+			return *(--this->end());
+		}
+		const T& back() const
+		{
+			return (const T)back();
+		}
 		////////////////////////////////////////////////////////////////////////////////////////////
 		// List Modify
 		iterator<T> insert(iterator<T> pos, const T& val)
@@ -222,6 +264,30 @@ namespace bit
 		{
 			erase(this->begin());
 		}
+
+		void clear()
+		{
+			iterator<T> cur(_head->_next);
+			iterator<T> next(_head->_next->_next);
+			while (next != this->end())
+			{
+				delete cur._node;
+				cur = next;
+				++next;
+			}
+			_size = 0;
+		}
+
+		void swap(list<T>& l)
+		{
+			ListNode<T>* temp = _head;
+			int temp_size = _size;
+			_head = l._head;
+			_size = l._size;
+			l._head = temp;
+			l._size = temp_size;
+		}
+
 	private:
 		ListNode<T>* _head;
 		int _size = 0;
