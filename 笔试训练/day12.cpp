@@ -178,63 +178,63 @@
 
 
 
-#include<iostream>
-#include<string>
-#include<vector>
-using namespace std;
-
-int main()
-{
-    int n;
-    cin >> n;
-    string in;
-    getchar();
-    getline(cin, in);
-    string ch;
-    vector<int> s; vector<int> h; vector<int> y;
-
-    for (int i = 0; i < in.size(); ++i)
-    {
-        if (in[i] == 's')
-        {
-            ch += 's';
-            s.push_back(i);
-        }
-        if (in[i] == 'h')
-        {
-            ch += 'h';
-            h.push_back(i);
-        }
-        if (in[i] == 'y')
-        {
-            ch += 'y';
-            y.push_back(i);
-        }
-    }
-    int i = 0, j = 0, k = 0;
-    int si = 0, hi = 0, yi = 0;
-    int ret = 0;
-    for (i = s[si]; si < s.size(); ++si)
-    {
-        i = s[si];
-        hi = 0;
-        for (j = h[hi]; hi < h.size(); ++hi)
-        {
-            j = h[hi];
-            if (j > i)
-            {
-                yi = 0;
-                for (k = y[yi]; yi < y.size(); ++yi)
-                {
-                    k = y[yi];
-                    if (k > j)
-                        ++ret;
-                }
-
-            }
-
-        }
-    }
-    cout << ret << endl;
-    return 0;
-}
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int n;
+//    cin >> n;
+//    string in;
+//    getchar();
+//    getline(cin, in);
+//    string ch;
+//    vector<int> s; vector<int> h; vector<int> y;
+//
+//    for (int i = 0; i < in.size(); ++i)
+//    {
+//        if (in[i] == 's')
+//        {
+//            ch += 's';
+//            s.push_back(i);
+//        }
+//        if (in[i] == 'h')
+//        {
+//            ch += 'h';
+//            h.push_back(i);
+//        }
+//        if (in[i] == 'y')
+//        {
+//            ch += 'y';
+//            y.push_back(i);
+//        }
+//    }
+//    int i = 0, j = 0, k = 0;
+//    int si = 0, hi = 0, yi = 0;
+//    int ret = 0;
+//    for (i = s[si]; si < s.size(); ++si)
+//    {
+//        i = s[si];
+//        hi = 0;
+//        for (j = h[hi]; hi < h.size(); ++hi)
+//        {
+//            j = h[hi];
+//            if (j > i)
+//            {
+//                yi = 0;
+//                for (k = y[yi]; yi < y.size(); ++yi)
+//                {
+//                    k = y[yi];
+//                    if (k > j)
+//                        ++ret;
+//                }
+//
+//            }
+//
+//        }
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
