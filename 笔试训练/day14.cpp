@@ -66,72 +66,72 @@
 
 
 
-
-#include <climits>
-#include <iostream>
-#include<vector>
-using namespace std;
-
-int main()
-{
-    int n;
-    cin >> n;
-    vector<int> v(n);
-    int max = INT_MIN;
-    int min = INT_MAX;
-    for (int i = 0; i < n; ++i)
-    {
-        int a = 0;
-        cin >> a;
-        v[i] = a;
-        if (a > max) max = a;
-        if (a < min) min = a;
-    }
-    vector<int> count(max - min + 2);//记录数字几有几个
-    for (int i = 0; i < n; ++i)
-    {
-        ++count[v[i]];
-    }
-    int ret = 0;
-    if (count[count.size() - 1] * count.size() - 1 >= count[count.size() - 2] * count.size() - 2)
-    {
-        ret += count[count.size() - 1] * count.size() - 1;
-        count[count.size() - 1] = 0;
-        count[count.size() - 2] = 0;
-    }
-    int falg = 1;
-    while (falg)
-    {
-        falg = 0;
-        for (int i = 1; i < count.size() - 1; ++i)
-        {
-            if (count[i] == 0) continue;
-            if (count[i] * i >= count[i - 1] * (i - 1) + count[i + 1] * (i + 1))
-            {
-                ret += i * count[i];
-                count[i - 1] = 0;
-                count[i] = 0;
-                count[i + 1] = 0;
-                ++i;
-                falg = 1;
-            }
-            if (i < count.size() - 3 && count[i] * i + count[i + 2] * (i + 2) >= count[i - 1] * (i - 1) + count[i + 1] * (i + 1) + count[i + 3] * (i + 3))
-            {
-                ret += count[i] * i + count[i + 2] * (i + 2);
-                count[i - 1] = 0;
-                count[i] = 0;
-                count[i + 1] = 0;
-                count[i + 2] = 0;
-                count[i + 3] = 0;
-                i += 3;
-                falg = 1;
-            }
-
-        }
-    }
-    cout << ret << endl;
-    return 0;
-}
+//删除相邻数字的最大分数（0）
+//#include <climits>
+//#include <iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int n;
+//    cin >> n;
+//    vector<int> v(n);
+//    int max = INT_MIN;
+//    int min = INT_MAX;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        int a = 0;
+//        cin >> a;
+//        v[i] = a;
+//        if (a > max) max = a;
+//        if (a < min) min = a;
+//    }
+//    vector<int> count(max - min + 2);//记录数字几有几个
+//    for (int i = 0; i < n; ++i)
+//    {
+//        ++count[v[i]];
+//    }
+//    int ret = 0;
+//    if (count[count.size() - 1] * count.size() - 1 >= count[count.size() - 2] * count.size() - 2)
+//    {
+//        ret += count[count.size() - 1] * count.size() - 1;
+//        count[count.size() - 1] = 0;
+//        count[count.size() - 2] = 0;
+//    }
+//    int falg = 1;
+//    while (falg)
+//    {
+//        falg = 0;
+//        for (int i = 1; i < count.size() - 1; ++i)
+//        {
+//            if (count[i] == 0) continue;
+//            if (count[i] * i >= count[i - 1] * (i - 1) + count[i + 1] * (i + 1))
+//            {
+//                ret += i * count[i];
+//                count[i - 1] = 0;
+//                count[i] = 0;
+//                count[i + 1] = 0;
+//                ++i;
+//                falg = 1;
+//            }
+//            if (i < count.size() - 3 && count[i] * i + count[i + 2] * (i + 2) >= count[i - 1] * (i - 1) + count[i + 1] * (i + 1) + count[i + 3] * (i + 3))
+//            {
+//                ret += count[i] * i + count[i + 2] * (i + 2);
+//                count[i - 1] = 0;
+//                count[i] = 0;
+//                count[i + 1] = 0;
+//                count[i + 2] = 0;
+//                count[i + 3] = 0;
+//                i += 3;
+//                falg = 1;
+//            }
+//
+//        }
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
 
 //17
 //1 1 2 2 2 2 2 3 3 3 4 4 5 6 7 7 8
