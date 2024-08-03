@@ -126,18 +126,18 @@
 //        if (ret_hp[i] > max_hp)
 //        {
 //            ret = i + 1;
-            max_hp = ret_hp[i];
-            min_shy = ret_shy[i];
-        }
-        else if (ret_hp[i] == max_hp)
-        {
-            if (ret_shy[i] < min_shy)
-            {
-                ret = i + 1;
-                min_shy = ret_shy[i];
-            }
-        }
-    }
-    cout << ret << endl;
-    return 0;
-}
+//            max_hp = ret_hp[i];
+//            min_shy = ret_shy[i];
+//        }
+//        else if (ret_hp[i] == max_hp)
+//        {
+//            if (ret_shy[i] < min_shy)
+//            {
+//                ret = i + 1;
+//                min_shy = ret_shy[i];
+//            }
+//        }
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
