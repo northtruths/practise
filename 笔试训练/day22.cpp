@@ -41,51 +41,51 @@
 
 
 
-
-#include <climits>
-#include <functional>
-#include<iostream>
-#include<algorithm>
-#include<vector>
-using namespace std;
-
-int main()
-{
-    int m, n;
-    cin >> m >> n;
-    vector<int> v(n);
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> v[i];
-    }
-    int ret = INT_MAX;
-    sort(v.begin(), v.end(), greater<int>());
-    for (int i = 0; i < n; ++i)
-    {
-        int cur = 0;
-        for (int j = i; j < n; ++j)
-        {
-            cur = v[i];
-            for(int k = j + 1; k < n; ++k)
-            {
-                if (cur + v[k] <= m)
-                {
-                    cur += v[k];
-                    if (cur == m)
-                    {
-                        cout << 0 << endl;
-                        return 0;
-                    }
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            ret = cur < ret ? cur : ret;
-        }
-
-    }
-    cout << ret << endl;
-    return 0;
-}
+//装箱问题（背包问题？不会）
+//#include <climits>
+//#include <functional>
+//#include<iostream>
+//#include<algorithm>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int m, n;
+//    cin >> m >> n;
+//    vector<int> v(n);
+//    for (int i = 0; i < n; ++i)
+//    {
+//        cin >> v[i];
+//    }
+//    int ret = INT_MAX;
+//    sort(v.begin(), v.end(), greater<int>());
+//    for (int i = 0; i < n; ++i)
+//    {
+//        int cur = 0;
+//        for (int j = i; j < n; ++j)
+//        {
+//            cur = v[i];
+//            for(int k = j + 1; k < n; ++k)
+//            {
+//                if (cur + v[k] <= m)
+//                {
+//                    cur += v[k];
+//                    if (cur == m)
+//                    {
+//                        cout << 0 << endl;
+//                        return 0;
+//                    }
+//                }
+//                else
+//                {
+//                    continue;
+//                }
+//            }
+//            ret = cur < ret ? cur : ret;
+//        }
+//
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
