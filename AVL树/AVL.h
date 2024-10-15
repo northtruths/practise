@@ -120,7 +120,7 @@ private:
 				{
 					cur->_left = newnode;
 					newnode->_parent = cur;
-					return cur;
+					return newnode;
 				}
 				else
 				{
@@ -133,7 +133,7 @@ private:
 				{
 					cur->_right = newnode;
 					newnode->_parent = cur;
-					return cur;
+					return newnode;
 				}
 				else
 				{
@@ -149,7 +149,9 @@ private:
 	{
 		if (pRoot == nullptr)
 			return true;
-		if (pRoot->bf >= 2)
+
+		int bf = abs((int)_Height(pRoot->_right) - (int)_Height(pRoot->_left));
+		if (pRoot->bf >= 2 && pRoot->bf != bf)
 			return false;
 		return _IsAVLTree(pRoot->_left) && _IsAVLTree(pRoot->_right);
 	}
@@ -187,6 +189,10 @@ private:
 		pParent->_parent = L;
 		L->_right = pParent;
 		L->_parent = GrandParent;
+		if (pParent == GrandParent->_left)
+			GrandParent->_left = L;
+		else
+			GrandParent->_right = L;
 
 		pParent->bf = 0;
 		L->bf = 0;
@@ -207,6 +213,10 @@ private:
 		pParent->_parent = R;
 		R->_left = pParent;
 		R->_parent = GrandParent;
+		if (pParent == GrandParent->_left)
+			GrandParent->_left = R;
+		else
+			GrandParent->_right = R;
 
 		pParent->bf = 0;
 		R->bf = 0; 
@@ -215,13 +225,18 @@ private:
 	// ÓÒ×óË«Ðý
 	void RotateRL(Node* pParent)
 	{
-		Node* R = pParent->_right;
+ 		Node* R = pParent->_right;
 		Node* RL = R->_left;
 
-		RotateR(pParent->_left);
+		RotateR(pParent->_right);
 		RotateL(pParent);
-
-		if(RL->bf == 1)
+		if (RL->bf == 0)
+		{
+			RL->bf = 0;
+			pParent->bf = 0;
+			R->bf = 0;
+		}
+		else if(RL->bf == 1)
 		{
 			RL->bf = 0;
 			pParent->bf = 0;
@@ -241,10 +256,16 @@ private:
 		Node* L = pParent->_left;
 		Node* LR = L->_right;
 
-		RotateL(pParent->_right);
+		RotateL(pParent->_left);
 		RotateR(pParent);
 
-		if (LR->bf == 1)
+		if (LR->bf == 0)
+		{
+			LR->bf = 0;
+			pParent->bf = 0;
+			L->bf = 0;
+		}
+		else if (LR->bf == 1)
 		{
 			LR->bf = 0;
 			pParent->bf = 0;
