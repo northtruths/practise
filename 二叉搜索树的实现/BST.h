@@ -138,14 +138,15 @@ public:
 		_InOrder(_head);
 	}
 
-	void _InOrder(Node* root)
-	{
-		if (root == nullptr)
-			return;
-		_InOrder(root->left);
-		cout << root->_value << endl;
-		_InOrder(root->right);
-	}
+private:
+		void _InOrder(Node* root)
+		{
+			if (root == nullptr)
+				return;
+			_InOrder(root->left);
+			cout << root->_value << endl;
+			_InOrder(root->right);
+		}
 
 private:
 	Node* _head = nullptr;
