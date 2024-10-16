@@ -31,7 +31,10 @@ public:
 	{
 
 	}
-
+	~AVLTree()
+	{
+		Destroy(_root);
+	}
 	bool Insert(const T& val)
 	{
 		Node* cur = _Insert(val);
@@ -287,6 +290,18 @@ private:
 		_InOrder(root->_left);
 		cout << root->_val << ' ';
 		_InOrder(root->_right);
+	}
+
+	void Destroy(Node* root)
+	{
+		if (root == nullptr)
+		{
+			return;
+		}
+		Destroy(root->_left);
+		Destroy(root->_right);
+		delete root;
+		root = nullptr;
 	}
 private:
 
