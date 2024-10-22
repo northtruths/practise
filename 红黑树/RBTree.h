@@ -47,8 +47,9 @@ namespace nor
 		RBTree()
 		{
 			_phead = new Node;
-			_phead->_left = _phead;
-			_phead->_right = _phead;
+			_phead->_parent = nullptr;
+			_phead->_left = nullptr;
+			_phead->_right = nullptr;
 		}
 		
 		bool Insert(T& data)
@@ -57,6 +58,16 @@ namespace nor
 			if (cur == nullptr)//已有插入值，插入失败
 			{
 				return false;
+			}
+			//如果插入的节点在最左边或最右边，则需要更新头节点的左右,并且不论是否旋转，插入节点还是会在树的最左/最右
+			//头节点的父亲节点的更新要在旋转函数中进行
+			if (cur == _phead->_right->_right)
+			{
+				_phead->_right = cur;
+			}
+			if (cur == _phead->_left->_left)
+			{
+				_phead->_left = cur;
 			}
 			while(cur->_parent != _phead)
 			{
@@ -121,6 +132,7 @@ namespace nor
 			}
 			Node* root = GetRoot();
 			root->col = BLACK;
+
 			return true;
 		}
 
@@ -204,9 +216,10 @@ namespace nor
 			{
 				_phead->_left = newnode;
 				_phead->_right = newnode;
+				_phead->_parent = newnode;
 				newnode->_parent = _phead;
 				newnode->col = BLACK;
-				return _phead->_left;
+				return newnode;
 			}
 			while (cur)
 			{
@@ -243,7 +256,12 @@ namespace nor
 		void RotateL(Node* parent)
 		{		
 			Node* grandparent = parent->_parent;
-			
+
+			if (grandparent == GetRoot())
+			{
+				_phead->_parent = grandparent->_right;
+			}
+
 			if (parent->_left)
 			{
 				parent->_left->_parent = grandparent;
@@ -273,6 +291,11 @@ namespace nor
 		void RotateR(Node* parent)
 		{
 			Node* grandparent = parent->_parent;
+
+			if (grandparent == GetRoot())
+			{
+				_phead->_parent = grandparent->_left;
+			}
 
 			if (parent->_right)
 			{
@@ -325,10 +348,10 @@ namespace nor
 		//获取根节点
 		Node* GetRoot()
 		{
-			if (_phead->_left == _phead)
+			if (_phead->_parent == _phead)
 				return nullptr;
 			else
-				return _phead->_left;
+				return _phead->_parent;
 		}
 		//中序遍历
 		void _InOrder(Node* root)

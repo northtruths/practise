@@ -6,9 +6,9 @@ using namespace nor;
 void test1()
 {
 	RBTree<int> t1;
-	int arr1[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
-	//int arr2[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
-	for (int e : arr1)
+	//int arr1[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+	int arr2[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+	for (int e : arr2)
 	{
 		if (e == 14)
 			int a = 0;
