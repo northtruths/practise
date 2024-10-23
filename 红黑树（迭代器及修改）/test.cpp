@@ -3,7 +3,6 @@
 #include"RBTree.h"
 using namespace nor;
 
-
 void test1()
 {
 	RBTree<int> t1;
@@ -15,14 +14,19 @@ void test1()
 			int a = 0;
 		t1.Insert(e);
 	}
-	cout << t1.Rotate_num << endl; 
-	if (t1.IsValidRBTRee())
-		cout << "yes" << endl;
-	else
-		cout << "no" << endl;
-	t1.InOrder();
+	auto it = t1.begin();
+	for (it; it != t1.end(); ++it)
+	{
+		cout << *it << " ";
+	}
 	cout << endl;
 
+	auto it1 = --t1.end();
+	for (it1; it1 != t1.end(); --it1)
+	{
+		cout << *it1 << " ";
+	}
+	cout << endl;
 }
 
 int main()

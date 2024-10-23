@@ -18,6 +18,8 @@ namespace nor
 		RIGHT
 	};
 
+
+
 	template<class T>
 	struct RBTreeNode
 	{
@@ -38,11 +40,127 @@ namespace nor
 		T _data;
 	};
 
+	template<class T>
+	struct RBTreeIterator
+	{
+		typedef RBTreeNode<T> Node;
+		typedef RBTreeIterator<T> iterator;
+
+		RBTreeIterator(Node* node, Node* phead)
+			:_node(node)
+			,_phead(phead)
+		{}
+		//若有右子树，找右子树的最小
+		//若无，找一个节点，这个节点是它父节点的左孩子
+		Node* LeftMost(Node* cur)
+		{
+			while (cur->_left)
+			{
+				cur = cur->_left;
+			}
+			return cur;
+		}
+		iterator& operator++()
+		{
+			if (_node->_right)
+			{
+				_node = LeftMost (_node->_right);
+				return *this;
+			}
+			else
+			{
+				while (_node->_parent->_left != _node)
+				{
+					//这种情况下，如果当前节点的父节点是头节点，则树已走完，返回头节点
+					if (_node->_parent == _phead)
+					{
+						_node = _phead;
+						return *this;
+					}
+					_node = _node->_parent;
+				}
+				_node = _node->_parent;
+				return *this;
+			}
+		}
+
+		//若有左子树，找左子树最大
+		//若无，找一个节点，这个节点是它父节点的右孩子
+		Node* RightMost(Node* cur)
+		{
+			while (cur->_right)
+			{
+				cur = cur->_right;
+			}
+			return cur;
+		}
+		iterator& operator--()
+		{
+			if (_node == _phead)
+			{
+				_node = _phead->_right;
+				return *this;
+			}
+			if (_node->_left)
+			{
+				_node = RightMost(_node->_left);
+				return *this;
+			}
+			else
+			{
+				while (_node->_parent->_right != _node)
+				{
+					//这种情况下，如果当前节点的父节点是头节点，则树已走完，返回头节点
+					if (_node->_parent == _phead)
+					{
+						_node = _phead;
+						return *this;
+					}
+					_node = _node->_parent;
+				}
+				_node = _node->_parent;
+				return *this;
+			}
+		}
+
+
+		T& operator*()
+		{
+			return _node->_data;
+		}
+		T* operator->()
+		{
+			return &_node->_data;
+		}
+
+		bool operator==(const iterator& it) const
+		{
+			return _node == it._node;
+		}
+		bool operator!=(const iterator& it) const
+		{
+			return _node != it._node;
+		}
+		Node* _node;
+		Node* _phead;
+	};
+
 	// 为了后序封装map和set，在实现时给红黑树多增加了一个头结点
 	template<class T>
 	class RBTree
 	{
 		typedef RBTreeNode<T> Node;
+		typedef RBTreeIterator<T> iterator;
+	public:
+		iterator begin()
+		{
+			return {LeftMost(), _phead };
+		}
+
+		iterator end()
+		{
+			return {_phead, _phead};
+		}
 	public:
 
 		RBTree()
@@ -52,7 +170,7 @@ namespace nor
 			_phead->_left = nullptr;
 			_phead->_right = nullptr;
 		}
-
+		
 		bool Insert(T& data)
 		{
 			Node* cur = _Insert(data);
@@ -70,7 +188,7 @@ namespace nor
 			{
 				_phead->_left = cur;
 			}
-			while (cur->_parent != _phead)
+			while(cur->_parent != _phead)
 			{
 				Node* parent = cur->_parent;
 				if (parent->col == RED)
@@ -255,11 +373,11 @@ namespace nor
 			}
 		}
 		void RotateL(Node* parent)
-		{
+		{		
 			Node* grandparent = parent->_parent;
 
 			int flag = 0;//更新头节点的标志
-			Node* newroot = nullptr;
+			Node* newroot= nullptr;
 			if (grandparent == GetRoot())
 			{
 				flag = 1;
@@ -274,12 +392,12 @@ namespace nor
 				parent->_parent = grandparent->_parent;
 				if (grandparent == grandparent->_parent->_left)
 					grandparent->_parent->_left = parent;
-				else if (grandparent == grandparent->_parent->_right)
+				else if(grandparent == grandparent->_parent->_right)
 					grandparent->_parent->_right = parent;
 				grandparent->_parent = parent;
 			}
 			else
-			{
+			{ 
 				parent->_left = grandparent;
 				parent->_parent = grandparent->_parent;
 				if (grandparent == grandparent->_parent->_left)
@@ -287,8 +405,8 @@ namespace nor
 				else if (grandparent == grandparent->_parent->_right)
 					grandparent->_parent->_right = parent;
 				grandparent->_parent = parent;
-				grandparent->_right = nullptr;
-			}
+				grandparent->_right= nullptr;
+			} 
 			grandparent->col = RED;
 			++Rotate_num;
 			if (flag)
@@ -317,7 +435,7 @@ namespace nor
 				parent->_parent = grandparent->_parent;
 				if (grandparent == grandparent->_parent->_left)
 					grandparent->_parent->_left = parent;
-				else if (grandparent == grandparent->_parent->_right)
+				else if(grandparent == grandparent->_parent->_right)
 					grandparent->_parent->_right = parent;
 				grandparent->_parent = parent;
 			}
@@ -327,7 +445,7 @@ namespace nor
 				parent->_parent = grandparent->_parent;
 				if (grandparent == grandparent->_parent->_left)
 					grandparent->_parent->_left = parent;
-				else if (grandparent == grandparent->_parent->_right)
+				else if(grandparent == grandparent->_parent->_right)
 					grandparent->_parent->_right = parent;
 				grandparent->_parent = parent;
 				grandparent->_left = nullptr;
@@ -383,7 +501,7 @@ namespace nor
 
 	private:
 		Node* _phead;
-	public:
+		public:
 		int Rotate_num = 0;
 	};
 }
