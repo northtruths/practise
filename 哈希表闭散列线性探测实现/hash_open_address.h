@@ -4,33 +4,31 @@
 #include<string>
 using namespace std;
 
+template<class K>
+struct HashFunc
+{
+	size_t operator()(const K& key = K(), size_t size = size_t())
+	{
+		return (size_t)key % size;
+	}
+};
+
+template<>
+struct HashFunc<string>
+{
+	size_t operator()(const string& key = string(), size_t size = size_t())
+	{
+		int i = 0;
+		for (char e : key)
+		{
+			i = (i + e) * 31;
+		}
+		return i % size;
+	}
+};
 
 namespace open_adress
 {
-
-	template<class K>
-	struct HashFunc
-	{
-		size_t operator()(const K& key = K(), size_t size = size_t())
-		{
-			return (size_t)key % size;
-		}
-	};
-
-	template<>
-	struct HashFunc<string>
-	{
-		size_t operator()(const string& key = string(), size_t size = size_t())
-		{
-			int i = 0;
-			for (char e : key)
-			{
-				i += e * 31;
-			}
-			return i % size;
-		}
-	};
-
 	enum state
 	{
 		EXIST,
