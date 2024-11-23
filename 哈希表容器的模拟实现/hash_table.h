@@ -37,7 +37,7 @@ namespace hash_bucket
 		HashData* _next;
 		HashData(const pair<K, V>& kv = pair<K, V>())
 			:_kv(kv)
-			,_next(nullptr)
+			, _next(nullptr)
 		{}
 	};
 
@@ -47,7 +47,7 @@ namespace hash_bucket
 	public:
 		HashTable()
 			:_num(0)
-			,_table(3, nullptr)
+			, _table(3, nullptr)
 		{}
 		~HashTable()
 		{
@@ -104,7 +104,7 @@ namespace hash_bucket
 						}
 						else
 						{
-							pre -> _next = nullptr;
+							pre->_next = nullptr;
 						}
 						newtable[newhashi] = pre;
 					}
@@ -154,6 +154,20 @@ namespace hash_bucket
 				del = del->_next;
 			}
 			return false;
+		}
+
+		size_t size()
+		{
+			return _table.size();
+		}
+		size_t num()
+		{
+			return _num;
+		}
+
+		HashData<K, V>* operator[](size_t i)
+		{
+			return _table[i];
 		}
 	private:
 		vector<HashData<K, V>*> _table;
