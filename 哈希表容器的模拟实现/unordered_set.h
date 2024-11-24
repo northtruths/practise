@@ -17,36 +17,50 @@ namespace nor
 				iterator = iterator->_next;
 			else
 			{
-				for (++hashi; hashi < table.size() - 1; ++hashi)
-					if (table[hashi])
-						break;
-				iterator = table[hashi];
+				if(hashi < table.size() - 1)
+				{
+					for (++hashi; hashi < table.size() - 1; ++hashi)
+						if (table[hashi])
+							break;
+					iterator = table[hashi];
+				}
+				else
+				{
+					iterator = nullptr;
+				}
 			}
 			return *this;
 		}
 
-		HBIterator& operator++(int)
+		HBIterator operator++(int)
 		{
 			HBIterator& ret = *this;
 			if (iterator->_next)
 				iterator = iterator->_next;
 			else
 			{
-				for (hashi + 1; hashi < table.size() - 1; ++hashi)
-					if (table[hashi])
-						break;
-				iterator = table[hashi];
+				if (hashi < table.size() - 1)
+				{
+					for (++hashi; hashi < table.size() - 1; ++hashi)
+						if (table[hashi])
+							break;
+					iterator = table[hashi];
+				}
+				else
+				{
+					iterator = nullptr;
+				}
 			}
 			return ret;
 		}
 
 		K& operator*()
 		{
-			return this->iterator->_kK.second;
+			return this->iterator->_kv.second;
 		}
 		K* operator->()
 		{
-			&(this->iterator->_kv.second);
+			return &(this->iterator->_kv.second);
 		}
 		bool operator==(const HBIterator& it)
 		{
@@ -65,7 +79,7 @@ namespace nor
 	template<class K, class HF = HashFunc<K>>
 	class unordered_set
 	{
-		typedef HBIterator<K,HF> iterator;
+		typedef HBIterator<K, HF> iterator;
 	public:
 		unordered_set()
 			:_ht()
@@ -96,38 +110,8 @@ namespace nor
 		{
 			return _ht.num == 0;
 		}
-		//////////////////////////////////////////////////////////////
-				//Acess
-		K& operator[](const K& key)
-		{
-			HashData<K, K>* cur = _ht.Find(key);
-			if (cur)
-			{
-				return cur->_kv.second;
-			}
-			else
-			{
-				_ht.insert({ key, K() });
-				auto it = this->Find(key);
-				return *it;
-			}
-		}
-		const K& operator[](const K& key)const
-		{
-			HashData<K, K>* cur = _ht.Find(key);
-			if (cur)
-			{
-				return cur->_kv.second;
-			}
-			else
-			{
-				_ht.insert({ key, K() });
-				auto it = this->Find(key);
-				return *it;
-			}
-		}
-		//////////////////////////////////////////////////////////////
-				// lookup
+/////////////////////////////////////////////////////////
+		// lookup
 		iterator Find(const K& key)
 		{
 			size_t hashi = HF()(key, _ht.size());
@@ -143,12 +127,12 @@ namespace nor
 					++ret;
 			return ret;
 		}
-		//////////////////////////////////////////////////////////////
-				// modify
-		pair<iterator, bool> Insert(const pair<K, K> kv)
+//////////////////////////////////////////////////////////////
+		// modify
+		pair<iterator, bool> Insert(const K& key)
 		{
-			bool ret = _ht.insert(kv);
-			return { Find(kv.first), ret };
+			bool ret = _ht.insert({ key, key });
+			return { Find(key), ret };
 		}
 		iterator Erase(iterator position)
 		{

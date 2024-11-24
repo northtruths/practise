@@ -17,25 +17,39 @@ namespace nor
 				iterator = iterator->_next;
 			else
 			{
-				for (++hashi; hashi < table.size() - 1; ++hashi)
-					if (table[hashi])
-						break;
-				iterator = table[hashi];
+				if (hashi < table.size() - 1)
+				{
+					for (++hashi; hashi < table.size() - 1; ++hashi)
+						if (table[hashi])
+							break;
+					iterator = table[hashi];
+				}
+				else
+				{
+					iterator = nullptr;
+				}
 			}
 			return *this;
 		}
 
-		HBIterator& operator++(int)
+		HBIterator operator++(int)
 		{
 			HBIterator& ret = *this;
 			if (iterator->_next)
 				iterator = iterator->_next;
 			else
 			{
-				for (hashi + 1; hashi < table.size() - 1; ++hashi)
-					if (table[hashi])
-						break;
-				iterator = table[hashi];
+				if (hashi < table.size() - 1)
+				{
+					for (++hashi; hashi < table.size() - 1; ++hashi)
+						if (table[hashi])
+							break;
+					iterator = table[hashi];
+				}
+				else
+				{
+					iterator = nullptr;
+				}
 			}
 			return ret;
 		}
@@ -46,7 +60,7 @@ namespace nor
 		}
 		V* operator->()
 		{
-			&(this->iterator->_kv.second);
+			return &(this->iterator->_kv.second);
 		}
 		bool operator==(const HBIterator& it)
 		{
