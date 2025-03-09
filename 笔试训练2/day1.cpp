@@ -55,52 +55,52 @@
 
 
 
-
-#include <iostream>
-#include<string>
-#include<vector>
-using namespace std;
-
-int main() {
-    string s;
-    cin >> s;
-    vector<int> map(s.size(), 0);//≈–∂œŒª÷√i «∑Ò…æ≥˝
-    for (int i = 0; i < s.size(); ++i)
-    {
-        if (i + 1 < s.size() && map[i] == 0 && map[i + 1] == 0 && s[i] == s[i + 1])
-        {
-            map[i] = map[i + 1] = 1;
-            int left = i - 1; int right = i + 2;
-            while (left >= 0 && map[left])
-                --left;
-            while (right < s.size() && map[right])
-                ++right;
-            while (left >= 0 && right < s.size())
-            {
-                if (s[left] == s[right])
-                {
-                    map[left] = map[right] = 1;
-                    ++i;
-                    while (map[left])
-                        --left;
-                    while (map[right])
-                        ++right;
-                }
-                else {
-                    break;
-                }
-            }
-            ++i;
-        }
-    }
-    string ret;
-    for (int i = 0; i < s.size(); ++i)
-    {
-        if (map[i] == 0)
-            ret += s[i];
-    }
-    if (ret.size())
-        cout << ret << endl;
-    else
-        cout << 0 << endl;
-}
+//µ„ª˜œ˚≥˝
+//#include <iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//
+//int main() {
+//    string s;
+//    cin >> s;
+//    vector<int> map(s.size(), 0);//≈–∂œŒª÷√i «∑Ò…æ≥˝
+//    for (int i = 0; i < s.size(); ++i)
+//    {
+//        if (i + 1 < s.size() && map[i] == 0 && map[i + 1] == 0 && s[i] == s[i + 1])
+//        {
+//            map[i] = map[i + 1] = 1;
+//            int left = i - 1; int right = i + 2;
+//            while (left >= 0 && map[left])
+//                --left;
+//            while (right < s.size() && map[right])
+//                ++right;
+//            while (left >= 0 && right < s.size())
+//            {
+//                if (s[left] == s[right])
+//                {
+//                    map[left] = map[right] = 1;
+//                    ++i;
+//                    while (map[left])
+//                        --left;
+//                    while (map[right])
+//                        ++right;
+//                }
+//                else {
+//                    break;
+//                }
+//            }
+//            ++i;
+//        }
+//    }
+//    string ret;
+//    for (int i = 0; i < s.size(); ++i)
+//    {
+//        if (map[i] == 0)
+//            ret += s[i];
+//    }
+//    if (ret.size())
+//        cout << ret << endl;
+//    else
+//        cout << 0 << endl;
+//}
