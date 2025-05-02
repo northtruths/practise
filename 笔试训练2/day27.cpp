@@ -18,50 +18,50 @@
 
 
 
-//走迷宫
-#include<iostream>
-#include<vector>
-#include<queue>
-#include<utility>
-using namespace std;
-
-int main() {
-    //最短路径，层序遍历
-    int n, m;
-    cin >> n >> m;
-    int x1, y1, x2, y2;
-    cin >> x1 >> y1 >> x2 >> y2;
-    --x1, --y1, --x2, --y2;
-    vector<string> grid;
-    for (int i = 0; i < n; ++i) {
-        cin >> grid[i];
-    }
-    int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
-    queue<vector<int>> q;//数组存三个值，x、y和层数
-    vector<vector<bool>> hash(n, vector<bool>(m, false));
-    q.push({ x1, y1, 0 });
-    hash[x1][y1] = true;
-    while (!q.empty()) {
-        for (auto& e : dir) {
-            int x = q.front()[0] + e[0];
-            int y = q.front()[1] + e[1];
-            if (0 <= x && x < n && 0 <= y && y < m &&
-                hash[x][y] == false && grid[x][y] == '.') {
-                q.push({ x, y, q.front()[2] + 1 });
-                hash[x][y] = true;
-            }
-            if (x == x2 && y == y2) {
-                cout << q.front()[2] + 1 << endl;
-                queue<vector<int>> emp;
-                swap(q, emp);
-                break;
-            }
-        }
-        if (!q.empty())
-            q.pop();
-    }
-    return 0;
-}
+//走迷宫（看题解后ac，bfs用的少，有什么优缺点都不知道，这种找最短路径就是最好对应bfs而非dfs，dfs超时）
+//#include<iostream>
+//#include<vector>
+//#include<queue>
+//#include<utility>
+//using namespace std;
+//
+//int main() {
+//    //最短路径，层序遍历
+//    int n, m;
+//    cin >> n >> m;
+//    int x1, y1, x2, y2;
+//    cin >> x1 >> y1 >> x2 >> y2;
+//    --x1, --y1, --x2, --y2;
+//    vector<string> grid(n);
+//    for (int i = 0; i < n; ++i) {
+//        cin >> grid[i];
+//    }
+//    int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//    queue<vector<int>> q;//数组存三个值，x、y和层数
+//    vector<vector<bool>> hash(n, vector<bool>(m, false));
+//    q.push({ x1, y1, 0 });
+//    hash[x1][y1] = true;
+//    while (!q.empty()) {
+//        for (auto& e : dir) {
+//            int x = q.front()[0] + e[0];
+//            int y = q.front()[1] + e[1];
+//            if (0 <= x && x < n && 0 <= y && y < m &&
+//                hash[x][y] == false && grid[x][y] == '.') {
+//                q.push({ x, y, q.front()[2] + 1 });
+//                hash[x][y] = true;
+//                if (x == x2 && y == y2) {
+//                    cout << q.front()[2] + 1 << endl;
+//                    return 0;
+//                }
+//            }
+//
+//        }
+//        if (!q.empty())
+//            q.pop();
+//    }
+//    cout << -1 << endl;
+//    return 0;
+//}
 
 
 
