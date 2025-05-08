@@ -92,46 +92,42 @@
 
 
 
-
-#include <iostream>
-#include<vector>
-using namespace std;
-
-int main() {
-    //动态规划，dp1[i]为选取第i个的学生的最大乘积，dp2[i]为选取第i个的最小
-    //dp1[i]计算：向前寻找最大d个dp，若学生还不够k个，直接乘，若够了，除去i位置的ai再乘，记录最大
-    //因为负数的存在，dp2存储最小，当前能力者为负数时，若这个最小值为负数，乘起来说不定就是最大了
-    int n;
-    cin >> n;
-    vector<int> nums(n);
-    for (int i = 0; i < n; ++i)
-        cin >> nums[i];
-    int k, d;
-    cin >> k >> d;
-    vector<int> dp1(n, -0x3f3f3f3f);
-    vector<int> dp2(n, 0x3f3f3f3f);
-    dp1[0] = dp2[0] = nums[0];
-    int stu = 0;//当前选取学生数量
-    int ret = 0;
-    for (int i = 1; i < n; ++i) {
-        int flag = 0;
-        for (int j = i - 1; j >= max(0, i - d); --j) {
-            if (stu >= k) {
-                if (nums[j] == 0)
-                    continue;
-                dp1[i] = max(dp1[i], max(dp2[j] * nums[i] / nums[j], dp1[j] * nums[i] / nums[j]));
-                dp2[i] = min(dp2[i], min(dp2[j] * nums[i] / nums[j], dp1[j] * nums[i] / nums[j]));
-                ret = max(ret, dp1[i]);
-            }
-            else {
-                dp1[i] = max(dp1[i], max(dp2[j] * nums[i], dp1[j] * nums[i]));
-                dp2[i] = min(dp2[i], min(dp2[j] * nums[i], dp1[j] * nums[i]));
-                ret = max(ret, dp1[i]);
-                flag = 1;
-                ++stu;
-            }
-        } 
-    }
-    cout << ret << endl;
-    return 0;
-}
+////合唱团（看题解后ac，大部分思路都到位了，又是差临门一脚，知道若两个最大、最小dp，它们在同一i位置选取的学员k数量不一定相同，得想办法控制，
+//// 但因为还是缺乏独立思考，明明将这个需要控制的变量加入dp中，二维dp就解决了）
+//#include <iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main() {
+//    //动态规划，dp1[i][j]为选取第i个、此时选了j个学生的最大乘积，dp2[i]为最小
+//    //dp1[i]计算：向前寻找最大d个dp，若学生还不够k个，直接乘，若够了，除去i位置的ai再乘，记录最大
+//    //因为负数的存在，dp2存储最小，当前能力者为负数时，若这个最小值为负数，乘起来说不定就是最大了
+//    int n;
+//    cin >> n;
+//    vector<int> nums(n);
+//    for (int i = 0; i < n; ++i)
+//        cin >> nums[i];
+//    int k, d;
+//    cin >> k >> d;
+//    vector<vector<long long>> dp1(n, vector<long long>(k + 1, 1));
+//    vector<vector<long long>> dp2(n, vector<long long>(k + 1, 1));
+//    long long ret = nums[0];
+//    for (int i = 0; i < n; ++i) {
+//        dp1[i][1] = dp2[i][1] = nums[i];
+//        for (int z = i - 1; z >= max(0, i - d); --z) {
+//            for (int j = 1; j <= k; ++j) {
+//                if (nums[i] < 0) {
+//                    dp1[i][j] = max(dp1[i][j], dp2[z][j - 1] * nums[i]);
+//                    dp2[i][j] = min(dp2[i][j], dp1[z][j - 1] * nums[i]);
+//                }
+//                else {
+//                    dp1[i][j] = max(dp1[i][j], dp1[z][j - 1] * nums[i]);
+//                    dp2[i][j] = min(dp2[i][j], dp2[z][j - 1] * nums[i]);
+//                }
+//                ret = max(dp1[i][k], ret);
+//            }
+//        }
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
