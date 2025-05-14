@@ -49,3 +49,45 @@
 
 
 //字符串的排列（未ac，时间空间复杂度O(n!)）
+// (后来做就过了，其实就是正常递归，只不过头脑混乱题都读得懵懂，完全无法分析思路的时间复杂度，加上看了如何剪枝优化，还是得头脑清晰地时候刷题)
+//class Solution {
+//public:
+//    /**
+//     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+//     *
+//     *
+//     * @param str string字符串
+//     * @return string字符串vector
+//     */
+//    vector<string> Permutation(string str) {
+//        //每次选择没有选的，递归，时间复杂度刚好为n!
+//        //排序+剪枝优化
+//        sort(str.begin(), str.end());
+//        vector<bool> hash(str.size(), false);
+//        string temp;
+//        DFS(str, hash, temp);
+//        return ret;
+//    }
+//
+//private:
+//
+//    void DFS(string& str, vector<bool>& hash, string& cur) {
+//        if (cur.size() == str.size()) {
+//            ret.push_back(cur);
+//        }
+//        else {
+//            for (int i = 0; i < str.size(); ++i) {
+//                if (hash[i] == false) {
+//                    if (i - 1 >= 0 && hash[i - 1] == false && str[i] == str[i - 1])
+//                        continue;//剪枝
+//                    cur += str[i];
+//                    hash[i] = true;
+//                    DFS(str, hash, cur);
+//                    hash[i] = false;
+//                    cur.pop_back();
+//                }
+//            }
+//        }
+//    }
+//    vector<string> ret;
+//};
