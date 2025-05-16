@@ -102,4 +102,47 @@
 
 
 
-//矩阵最长递增路径
+//矩阵最长递增路径（隔了几天后做，成功ac，不过不小心瞟到标签，虽说不看感觉能做出来，但是还是帮了大忙，
+// tips，这道题很久之前就做过，不过没马上想出来，若不能立即想出题解，还是遵循暴力+优化一步一步做出来吧）
+//class Solution {
+//public:
+//    /**
+//     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+//     *
+//     * 递增路径的最大长度
+//     * @param matrix int整型vector<vector<>> 描述矩阵的每个数
+//     * @return int整型
+//     */
+//    int solve(vector<vector<int> >& matrix) {
+//        //递归，并用一个数组记录从i、j开始的最长路径（剪枝）
+//        //当前位置接上四周能接上并且记录过的位置即可，因为路径递增原因，不会出现重复情况
+//        int n = matrix.size(), m = matrix[0].size();
+//        vector<vector<int> > ret(n, vector<int>(m, -1));
+//        int ret_max = 0;
+//        for (int i = 0; i < n; ++i) {
+//            for (int j = 0; j < m; ++j) {
+//                ret_max = max(ret_max, Dfs(matrix, ret, i, j));
+//            }
+//        }
+//        return ret_max;
+//    }
+//
+//private:
+//    int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+//
+//    //dfs返回以i、j为起点的最长路径
+//    int Dfs(vector<vector<int> >& grid, vector<vector<int> >& ret, int i, int j) {
+//        if (ret[i][j] != -1)//若不为-1说明以此为开始的路径最长已经记录
+//            return ret[i][j];
+//        for (auto& e : dir) {
+//            int x = i + e[0];
+//            int y = j + e[1];
+//            //如果x，y的位置比当前大，并且不为-1，说明能直接接上，为-1就递归下去计算x，y的位置
+//            if (0 <= x && x < grid.size() && 0 <= y && y < grid[0].size() && grid[i][j] < grid[x][y]) {
+//                ret[i][j] = max(ret[i][j], 1 + Dfs(grid, ret, x, y));
+//            }
+//        }
+//        ret[i][j] = max(1, ret[i][j]);//可能出现四周都不能接上，此刻i，j位置还是为-1，将其改为1标志已经计算过此处
+//        return ret[i][j];
+//    }
+//};
