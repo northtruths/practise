@@ -30,85 +30,89 @@
 //}
 
 
-#include<iostream>
-#include<vector>
-#include<unordered_set>
-using namespace std;
+//体育课测验（二）（头一天没有很多细节情况没考虑到，因为状态原因也肯定无法想清楚吧，第二天睡醒有个良好状态，条理清晰地就把情况给想明白然后ac了）
+//#include<iostream>
+//#include<vector>
+//#include<unordered_set>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    /**
+//     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+//     *
+//     *
+//     * @param numProject int整型
+//     * @param groups int整型vector<vector<>>
+//     * @return int整型vector
+//     */
+//    vector<int> findOrder(int numProject, vector<vector<int> >& groups) {
+//        //栈，每个分组看作栈
+//        //统计栈底的数据（当前栈元素大于1），若当前有与栈顶相同的栈底元素，则栈顶不能出栈，否则能够出栈
+//        int num = 2 * groups.size(); //总共项目个数，若最后不为0说明无法完成
+//        vector<int> hash(numProject, 0);//检查哪些数出现在栈底，出现一次说明就有一个限制，为0时说明无限制
+//        for (auto& e : groups)
+//            ++hash[e[0]];//下标0为栈底
+//        vector<int> ret;
+//        unordered_set<int> ret_hash;//记录已经无限制编号，避免重复
+//
+//        for (int i = 0; i < numProject; ++i) {
+//            if (hash[i] == 0) {//一开始就无限制
+//                if (ret_hash.count(i) == 0) {
+//                    ret_hash.insert(i);
+//                    ret.push_back(i);
+//                }
+//            }
+//        }
+//        int flag = 1;//判断是否有完成某个项目，没有结束循环
+//        while (flag) {
+//            flag = 0;
+//            for (auto& v : groups) {
+//                if (v.size() == 2) {
+//                    if (hash[v[1]] == 0)//这种情况要么是一开始无限制，要么是其他组解开的限制，所以肯定已经记录过，不用再记录
+//                    {
+//                        v.pop_back();
+//                        --num;
+//                        flag = 1;
+//                    }
+//                }
+//                if (v.size() == 1) {
+//                    if (hash[v[0]] == 0)//之前在其他地方完全解除的限制（使hash为0），此情况肯定已经记录过
+//                    {
+//                        v.pop_back();
+//                        --num;
+//                        flag = 1;
+//                    }
+//                    else {
+//                        --hash[v[0]];//限制减1
+//                        if (hash[v[0]] == 0 && ret_hash.count(v[0]) == 0) {
+//                            ret_hash.insert(v[0]);
+//                            ret.push_back(v[0]);
+//                        }
+//                        //只要只有一个元素就pop，因为不论是否已经解开都对其他的无影响，但留着不pop却会因再次循环到这而产生影响
+//                        v.pop_back();
+//                        --num;
+//                        flag = 1;
+//                    }
+//                }
+//            }
+//        }
+//        if (num != 0)
+//            return vector<int>();
+//        return ret;
+//    }
+//};
+//
+//int main() {
+//    Solution sl;
+//    vector<vector<int>> groups = { {1,2}, {2,1}, {2, 0} };
+//    sl.findOrder(3, groups);
+//    return 0;
+//}
 
-class Solution {
-public:
-    /**
-     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
-     *
-     *
-     * @param numProject int整型
-     * @param groups int整型vector<vector<>>
-     * @return int整型vector
-     */
-    vector<int> findOrder(int numProject, vector<vector<int> >& groups) {
-        //栈，每个分组看作栈
-        //统计栈底的数据（当前栈元素大于1），若当前有与栈顶相同的栈底元素，则栈顶不能出栈，否则能够出栈
-        int num = 2 * groups.size(); //总共项目个数，若最后不为0说明无法完成
-        vector<int> hash(numProject, 0);//检查哪些数出现在栈底，出现一次说明就有一个限制，为0时说明无限制
-        for (auto& e : groups)
-            ++hash[e[0]];//下标0为栈底
-        vector<int> ret;
-        unordered_set<int> ret_hash;//记录已经无限制编号，避免重复
-
-        for (int i = 0; i < numProject; ++i) {
-            if (hash[i] == 0) {//一开始就无限制
-                if (ret_hash.count(i) == 0) {
-                    ret_hash.insert(i);
-                    ret.push_back(i);
-                }
-            }
-        }
-        int flag = 1;//判断是否有完成某个项目，没有结束循环
-        while (flag) {
-            flag = 0;
-            for (auto& v : groups) {
-                if (v.size() == 2) {
-                    if (hash[v[1]] == 0)//这种情况要么是一开始无限制，要么是其他组解开的限制，所以肯定已经记录过，不用再记录
-                    {
-                        v.pop_back();
-                        --num;
-                        flag = 1;
-                    }
-                }
-                if (v.size() == 1) {
-                    if (hash[v[0]] == 0)//之前在其他地方完全解除的限制（使hash为0），此情况肯定已经记录过
-                    {
-                        v.pop_back();
-                        --num;
-                        flag = 1;
-                    }
-                    else {
-                        --hash[v[0]];//限制减1
-                        if (ret_hash.count(v[0]) == 0) {
-                            ret_hash.insert(v[0]);
-                            ret.push_back(v[0]);
-                            v.pop_back();
-                            --num;
-                            flag = 1;
-                        }
-                    }
-                }
-            }
-        }
-        if (num != 0)
-            return vector<int>();
-        return ret;
-    }
-};
-
-int main() {
-    Solution sl;
-    vector<vector<int>> groups = { {1,2}, {2,1}, {2, 0} };
-    sl.findOrder(3, groups);
-    return 0;
-}
 
 
+//合唱队形
 //#include <iostream>
 //#include<vector>
 //using namespace std;
