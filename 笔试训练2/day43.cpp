@@ -2,12 +2,34 @@
 
 
 
-
-
-
-
-
-
+//kotori和抽卡（二）（直接找到计算组合的代码ac，知道怎么做但想不出怎么计算排列组合了，运动后太累了，直接用它的代码明天再思考）
+//#include<iostream>
+//#include<vector>
+//#include<cmath>
+//using namespace std;
+//unsigned long long combination(int n, int k) {
+//    if (k < 0 || k > n) return 0;
+//    if (k == 0 || k == n) return 1;
+//    if (k > n - k) k = n - k; // 优化计算，利用 C(n, k) = C(n, n-k)
+//
+//    unsigned long long res = 1;
+//    for (int i = 1; i <= k; ++i) {
+//        res *= (n - k + i);
+//        res /= i;
+//    }
+//    return res;
+//}
+//int main() {
+//    //经模拟后得出问题本质为：从n个概率中选m个0.8，其他均为0.2，选法乘以m个0.8和(n-m)个0.2即为总概率
+//    int n, m;
+//    cin >> n >> m;
+//
+//    unsigned long long a = combination(n, m);
+//    long double b = pow(0.8, m);
+//    long double c = pow(0.2, n - m);
+//    printf("%.4Lf\n", a * b * c);
+//    return 0;
+//}
 
 
 
