@@ -130,32 +130,41 @@
 
 
 
-//小红取数（未ac，暴力超时）
+//小红取数（未ac，暴力超时，很久之后把它做出来了，期间被它难得放弃学习了一段时间，题解也不完全能看懂，
+// 最后同着之前的题解理解加上模拟，靠着模拟做出来了，还是没有完全理解同余定理，）
 //#include <iostream>
 //#include<vector>
 //using namespace std;
 //
-//long long n = 0, k = 0;
-//long long ret = 0;
-//
-//void Dfs(vector<long long>& nums, int i = 0, long long sum = 0) {
-//    if (sum % k == 0)
-//        ret = max(ret, sum);
-//    for (i; i < n; ++i) {
-//        Dfs(nums, i + 1, sum + nums[i]);
-//    }
-//}
-//
 //int main() {
-//    //1.因为数据范围为1e3，大概能支持O(n^2)的复杂度，所以dfs暴力
+//    //01背包+同余定理
+//    //dp[i][j]为从前i个挑选，总和%k为j时的最大和
+//    //取所有j=0的情况最大值就为结果
+//    long long n, k;
 //    cin >> n >> k;
 //    vector<long long> nums(n);
-//    for (int i = 0; i < n; ++i)
+//    for (long long i = 0; i < n; ++i)
 //        cin >> nums[i];
-//    Dfs(nums);
-//    if (ret)
-//        cout << ret << endl;
-//    else
-//        cout << -1 << endl;
+//    vector<vector<long long>> dp(n, vector<long long>(k, -1));
+//    dp[0][nums[0] % k] = nums[0];
+//    for (long long i = 1; i < n; ++i) {
+//        dp[i][nums[i] % k] = max(dp[i][nums[i] % k], nums[i]);
+//        for (long long j = k - 1; j >= 0; --j) {
+//            dp[i][j] = max(dp[i - 1][j], dp[i][j]);
+//            if (dp[i - 1][j] != -1) {//必须要前面的和存在
+//                long long a = nums[i] % k;
+//                long long b = (a + j) % k;
+//                dp[i][b] = max(dp[i - 1][b], dp[i - 1][j] + nums[i]);
+//            }
+//
+//        }
+//    }
+//    long long ret = -1;
+//    for (auto& e : dp) {
+//        ret = max(ret, e[0]);
+//    }
+//    if (ret == 0)
+//        ret = -1;
+//    cout << ret << endl;
 //    return 0;
 //}
