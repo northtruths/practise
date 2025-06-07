@@ -109,3 +109,57 @@
 //    hash[i] = false;
 //    return ret[i];
 //}
+
+
+
+//过桥（后来直接用BFS过了，但还并非最优解，不过状态还是很重要，之前就记得想用BFS但是没想清楚，这次一来就想出来，明明很简单）
+//#include<iostream>
+//#include<vector>
+//#include<queue>
+//using namespace std;
+//
+//int main() {
+//    //因为是找最快，用BFS
+//    //队列里存当前为第n块板子，每轮push结果++
+//    //一个哈希表记录走过的位置，已经走过则跳过不计算
+//    int n;
+//    cin >> n;
+//    vector<int> nums(1 + n);
+//    for (int i = 1; i <= n; ++i)
+//        cin >> nums[i];
+//    vector<bool> hash(1 + n, false);
+//    queue<int> qp;
+//    qp.push(1);
+//    hash[1] = true;
+//    int ret = 0;
+//    while (qp.size()) {
+//        int num = qp.size();
+//        while (num--) {
+//            int cur = qp.front();//当前序号
+//            qp.pop();
+//            if (cur == n) {
+//                cout << ret << endl;
+//                return 0;
+//            }
+//            if (nums[cur] >= 0) {
+//                for (int i = cur + 1; i <= min(n, cur + nums[cur]); ++i) {
+//                    if (hash[i] == false) {
+//                        qp.push(i);
+//                        hash[i] = true;
+//                    }
+//                }
+//            }
+//            else {//else可省略，贪心思想
+//                for (int i = max(1, cur + nums[i]); i < cur; ++i) {
+//                    if (hash[i] == false) {
+//                        qp.push(i);
+//                        hash[i] = true;
+//                    }
+//                }
+//            }
+//        }
+//        ++ret;
+//    }
+//    cout << -1 << endl;
+//    return 0;
+//}
